@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Text, View, Image, SafeAreaView, TouchableOpacity } from 'react-native';
+import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar } from 'react-native';
 import Slider from 'react-native-slider';
 import Moment from 'moment';
-import { FontAwesome5 } from '@expo/vector-icons';
+import DeviceInfo from 'react-native-device-info'
+import { FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
 import styles from './style';
 
 export default class MusicPlayer extends React.Component {
@@ -20,57 +21,93 @@ export default class MusicPlayer extends React.Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.maincontainer}>
-                <View style={{ alignItems: 'center' }}>
-                    <View style={{ alignItems: 'center', marginTop: 24 }}>
-                        <Text style={styles.playlist_textcontainer}>PLAYLIST</Text>
-                        <Text style={[styles.innertext, { fontSize: 15, fontWeight: '500', marginTop: 8 }]}>
-                            Now Playing
-                        </Text>
+            <SafeAreaView style={{ backgroundColor: '#2d545e', flex: 1, paddingTop: (DeviceInfo.hasNotch && Platform.OS === 'android') ? StatusBar.currentHeight : 0 }}>
+                <View style={{ margin: 3, flex: 1 }}>
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={{ color: '#FFFFFF', fontSize: 10 }}>PLAYLIST</Text>
+                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: '500' }}>Album_name_here</Text>
                     </View>
 
-                    <View style={styles.coverContainer}>
-                        <Image source={require('../../assets/images/temp.jpeg')} style={styles.cover} />
-                    </View>
 
-                    <View style={{ alignItems: 'center', marginTop: 32 }}>
-                        <Text style={[styles.innertext, { fontSize: 20, fontWeight: '500' }]}>Song Name</Text>
-                        <Text style={[styles.playlist_textcontainer, { fontSize: 16, marginTop: 8 }]}>Jeremy Blake</Text>
+                    <View style={{ marginTop: 60, height: 200, width: 200, alignSelf: 'center' }}>
+                        <Image source={require('../../assets/images/temp.jpeg')} style={{ height: 200, width: 200, borderRadius: 150, alignSelf: 'center' }} />
                     </View>
-                </View>
-
-                <View style={{ margin: 32 }}>
-                    <Slider
-                        minimumValue={0}
-                        maximumValue={this.state.trackLength}
-                        trackStyle={styles.track}
-                        thumbStyle={styles.thumb}
-                        minimumTrackTintColor="#93A8B3"
-                        onValueChange={seconds => this.changeTime(seconds)}
-                    />
-                    <View style={{ marginTop: -12, flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Text style={[styles.innertext, styles.timeStamp]}>{this.state.timeElapsed}</Text>
-                        <Text style={[styles.innertext, styles.timeStamp]}>{this.state.timeRemaining}</Text>
+                    <View style={{ marginTop: 50, flexDirection: 'column', alignItems: 'center' }}>
+                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: '500' }}>Song_Name_here</Text>
+                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: '500', marginTop: 3 }}>artist_name_here</Text>
                     </View>
-                </View>
-
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 16 }}>
-                    <TouchableOpacity>
-                        <FontAwesome5 name="backward" size={32} color="#93A8B3" />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.playButtonContainer}>
-                        <FontAwesome5
-                            name="play"
-                            size={32}
-                            color="#3D425C"
-                            style={[styles.playButton, { marginLeft: 8 }]}
+                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+                        <Slider
+                            minimumValue={0}
+                            maximumValue={this.state.trackLength}
+                            trackStyle={{ width: 300, height: 8 }}
+                            thumbStyle={{ height: 15, width: 10 }}
+                            thumbTouchSize={{ width: 100, height: 40 }}
+                            minimumTrackTintColor="#000000"
+                            onValueChange={seconds => this.changeTime(seconds)}
                         />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <FontAwesome5 name="forward" size={32} color="#93A8B3" />
-                    </TouchableOpacity>
+                        <View style={{ width: 300, backgroundColor: '#', flexDirection: 'row', justifyContent: 'space-between' }}>
+                            <Text style={{ flex: 1 }}>{this.state.timeElapsed}</Text>
+                            <Text style={{ alignSelf: 'flex-end' }}>{this.state.timeRemaining}</Text>
+                        </View>
+                    </View>
+                    <View style={{ width: 330, height: 100, backgroundColor: '#', alignSelf: 'center', margin: 15, flexDirection: 'row' }}>
+                        <TouchableOpacity style={{ flex: 1, backgroundColor: '#', height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }}>
+                            <FontAwesome5 name="backward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flex: 1, backgroundColor: '#', height: 100, width: 40, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <FontAwesome5
+                                name="play"
+                                size={50}
+                                color="#000000"
+                                style={{ alignItems: 'center', marginTop: 25 }}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flex: 1, backgroundColor: '#', height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }}>
+                            <FontAwesome5 name="forward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
+                        </TouchableOpacity>
+
+                    </View>
+                    <View style={{ backgroundColor: '#', height: 35, width: 150, alignSelf: 'center', flexDirection: 'row', margin: 5, justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={{ marginLeft: 20, backgroundColor: '#', width: 30 }}>
+                            <Feather
+                                name="repeat"
+                                size={30}
+                                color="#000000"
+                                style={{ alignItems: 'center' }}
+                            />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{ marginRight: 20, backgroundColor: '#', width: 30 }}>
+                            <Entypo
+                                name="shuffle"
+                                size={30}
+                                color="#000000"
+                                style={{ alignItems: 'center' }}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </SafeAreaView>
+
+
+            // <SafeAreaView style={{ backgroundColor: '#DDDDDD' }}>
+
+            //     <View style={{}}>
+            //     <View style={{ marginTop: 25, flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center' }}>
+            //     <TouchableOpacity style={{ flex: 1, alignSelf: 'center', marginLeft: 50, backgroundColor: '#555' }}>
+            //         <FontAwesome5 name="backward" size={32} color="#93A8B3" />
+            //     </TouchableOpacity>
+            //     <TouchableOpacity style={[styles.pbcont, { backgroundColor: '#666', flex: 1 }]}>
+
+            //     </TouchableOpacity>
+            //     <TouchableOpacity style={{ flex: 1, alignSelf: 'center', marginLeft: 50, backgroundColor: '#555', wid }}>
+            //         <FontAwesome5 name="forward" size={32} color="#93A8B3" />
+            //     </TouchableOpacity>
+            // </View>
+            //     </View>
+            // </SafeAreaView>
+
         );
     }
 }

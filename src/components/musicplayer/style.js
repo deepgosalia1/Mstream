@@ -2,19 +2,20 @@ import { StyleSheet, Platform, StatusBar, Dimensions } from 'react-native';
 
 var styles = StyleSheet.create({
     maincontainer: {
-        flex: 1,
-        backgroundColor: '#544459',
+        // flex: 1,
+        backgroundColor: '#FFFFFF',
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     },
     viewcontainer: {
         alignItems: 'center',
+        backgroundColor: '#000000',
     },
     playlist_textcontainer: {
         fontSize: 12,
         color: '#92969c',
     },
     innertexts: {
-        color: '#cdd0d1',
+        color: '#173d96',
     },
     coverContainer: {
         marginTop: 32,
@@ -27,9 +28,10 @@ var styles = StyleSheet.create({
         shadowOpacity: 0.3,
     },
     cover: {
-        width: 250, //(Dimensions.get('window').width),
-        height: 250, // (Dimensions.get('height').height),
+        width: 200, //(Dimensions.get('window').width),
+        height: 200, // (Dimensions.get('height').height),
         borderRadius: 125,
+        alignSelf: 'center',
     },
     track: {
         height: 2,
@@ -45,19 +47,19 @@ var styles = StyleSheet.create({
         fontSize: 11,
         fontWeight: '500',
     },
-    playButtonContainer: {
+    pbcont: {
         backgroundColor: '#FFF',
         borderColor: 'rgba(93, 63, 106, 0.2)',
         borderWidth: 16,
-        width: 128,
-        height: 128,
+        width: 200,
+        height: 100,
         borderRadius: 64,
         alignItems: 'center',
         justifyContent: 'center',
-        marginHorizontal: 32,
-        shadowColor: '#5D3F6A',
-        shadowRadius: 30,
-        shadowOpacity: 0.5,
+        // marginHorizontal: 32,
+        // shadowColor: '#5D3F6A',
+        // shadowRadius: 30,
+        // shadowOpacity: 0.5,
     },
 });
 module.exports = styles;
