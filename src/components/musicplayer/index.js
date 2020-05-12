@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar } from 'react-native';
+import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar, Dimensions } from 'react-native';
 import Slider from 'react-native-slider';
 import Moment from 'moment';
 import DeviceInfo from 'react-native-device-info'
@@ -40,13 +40,13 @@ export default class MusicPlayer extends React.Component {
                         <Slider
                             minimumValue={0}
                             maximumValue={this.state.trackLength}
-                            trackStyle={{ width: 300, height: 8 }}
-                            thumbStyle={{ height: 15, width: 10 }}
+                            trackStyle={{ width: Dimensions.get('screen').width - 15, height: 8 }}
+                            thumbStyle={{ height: 20, width: 20, backgroundColor: '#fff' }}
                             thumbTouchSize={{ width: 100, height: 40 }}
                             minimumTrackTintColor="#000000"
                             onValueChange={seconds => this.changeTime(seconds)}
                         />
-                        <View style={{ width: 300, backgroundColor: '#', flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <View style={{ width: Dimensions.get('screen').width - 35, backgroundColor: '#', flexDirection: 'row', justifyContent: 'space-between' }}>
                             <Text style={{ flex: 1 }}>{this.state.timeElapsed}</Text>
                             <Text style={{ alignSelf: 'flex-end' }}>{this.state.timeRemaining}</Text>
                         </View>
