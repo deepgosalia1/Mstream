@@ -10,7 +10,6 @@
 import React from 'react';
 import MusicPlayer from './src/components/musicplayer';
 import DPS from './src/components/dpscreen'
-import Editdp from './src/components/editdp'
 import EditDP from './src/components/editdp';
 
 
