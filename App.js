@@ -15,8 +15,9 @@ import MyTabs from './src/navigation';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
+    // <NavigationContainer>
+    //   <MyTabs />
+    // </NavigationContainer>
+    <EditDP />
   );
 }

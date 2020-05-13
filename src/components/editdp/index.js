@@ -10,22 +10,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 import styles from './style';
 import * as Permissions from 'expo-permissions';
 
-// const _pickImage = async () => {
-//     console.log("Reached here")
-//     let result = await ImagePicker.launchImageLibraryAsync({
-//         mediaTypes: ImagePicker.MediaTypeOptions.All,
-//         allowsEditing: true,
-//         aspect: [4, 3],
-//         quality: 1
-//     });
-
-//     console.log(result);
-
-//     if (!result.cancelled) {
-//         return result;
-//     }
-// };
-
 const EditDP = () => {
     const [image_obj, setImage] = useState({})
 
@@ -33,26 +17,14 @@ const EditDP = () => {
         ImagePicker.openPicker({
             width: 150,
             height: 150,
-            cropping: false,
-            // includeBase64: true,
+            cropping: true,
+            includeBase64: true,
         }).then(image => {
-            console.log(image)
-            setImage(...image_obj, image)
-            console.log(image_obj)
+            // console.log(image)
+            setImage(prevObj => image)
+            // console.log(image_obj)
         });
     };
-    useEffect(() => {
-        const getperm = async () => {
-            // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
-            const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-            if (status === 'granted') {
-                Alert('Great Job, permission granted');
-            } else {
-                throw new Error('Gallery permission not granted');
-            }
-        }
-        getperm()
-    }, [])
 
     return (
         <View style={styles.mainview}>
@@ -69,12 +41,7 @@ const EditDP = () => {
                     >
                         <TouchableOpacity
                             style={{ transform: [{ translateY: 90 }] }}
-                            onPress={async () => {
-                                const objj = await getimagepath()
-                                // setImage(obj)
-                                console.log(objj)
-
-                            }}
+                            onPress={() => { getimagepath() }}
                         >
                             <Entypo name="camera" size={50} color="white" style={{ alignSelf: 'flex-end', }} />
                         </TouchableOpacity>
