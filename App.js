@@ -14,15 +14,8 @@
 
 
 import * as React from 'react';
-import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Home from './components/Home';
-import Profile from './components/Profile';
-import Library from './components/Library';
-import MyTabs from './components/Navigator';
-
+import MyTabs from './src/navigation';
 
 
 export default function App() {

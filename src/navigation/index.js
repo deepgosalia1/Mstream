@@ -4,9 +4,9 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Home from './Home';
-import Profile from './Profile';
-import Library from './Library';
+import Home from '../components/home';
+import Profile from '../components/profile';
+import Library from '../components/library';
 
 
 
@@ -31,7 +31,7 @@ export default function MyTabs() {
           ),
         }}
       />
-      
+
       <Tab.Screen
         name="Library"
         component={Library}
