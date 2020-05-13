@@ -1,49 +1,58 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, Text, View, SafeAreaView, TouchableOpacity, Platform, StatusBar, Dimensions, ImageBackground, Alert } from 'react-native';
-import Slider from 'react-native-slider';
 import { Image, Button, Input } from 'react-native-elements';
-import Moment from 'moment';
-import DeviceInfo from 'react-native-device-info'
 import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
+// import ImagePicker from 'react-native-image-picker'
+import ImagePicker from 'react-native-image-crop-picker';
 import styles from './style';
-import { useState } from 'react';
 import * as Permissions from 'expo-permissions';
-import { useEffect } from 'react';
 
-const _pickImage = async () => {
-    console.log("Reached here")
-    let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1
-    });
+// const _pickImage = async () => {
+//     console.log("Reached here")
+//     let result = await ImagePicker.launchImageLibraryAsync({
+//         mediaTypes: ImagePicker.MediaTypeOptions.All,
+//         allowsEditing: true,
+//         aspect: [4, 3],
+//         quality: 1
+//     });
 
-    console.log(result);
+//     console.log(result);
 
-    if (!result.cancelled) {
-        return result;
-    }
-};
+//     if (!result.cancelled) {
+//         return result;
+//     }
+// };
 
 const EditDP = () => {
+    const [image_obj, setImage] = useState({})
 
-
-    const [uripath, setUri] = useState("")
-    // useEffect(() => {
-    //     async function getLocationAsync() {
-    //         // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
-    //         const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    //         if (status === 'granted') {
-    //             Alert('Great Job, permission granted');
-    //         } else {
-    //             throw new Error('Gallery permission not granted');
-    //         }
-    //     }
-    // }, [])
+    function getimagepath() {
+        ImagePicker.openPicker({
+            width: 150,
+            height: 150,
+            cropping: false,
+            // includeBase64: true,
+        }).then(image => {
+            console.log(image)
+            setImage(...image_obj, image)
+            console.log(image_obj)
+        });
+    };
+    useEffect(() => {
+        const getperm = async () => {
+            // permissions returns only for location permissions on iOS and under certain conditions, see Permissions.LOCATION
+            const { status, permissions } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+            if (status === 'granted') {
+                Alert('Great Job, permission granted');
+            } else {
+                throw new Error('Gallery permission not granted');
+            }
+        }
+        getperm()
+    }, [])
 
     return (
         <View style={styles.mainview}>
@@ -51,16 +60,21 @@ const EditDP = () => {
                 <View style={styles.imageopt}>
                     {/* var source = if uripath!=='' source={{ uri: uripath }} */}
                     <Image
-                        source={{ uri: uripath }}
-                        defaultSource={require('../../assets/images/temp.jpeg')}
+                        source={{ uri: `data:${image_obj.mime};base64,${image_obj.data}` }}
+                        // defaultSource={require('../../assets/images/temp.jpeg')}
                         style={{ width: 150, height: 150, borderRadius: 150, alignSelf: 'center' }}
-                        PlaceholderContent={<ActivityIndicator />}
+                        PlaceholderContent={<FontAwesome5 name="user-circle" size={128} color="black" />}
 
                     // onError = {(e) => {default}}
                     >
                         <TouchableOpacity
                             style={{ transform: [{ translateY: 90 }] }}
-                            onPress={() => { setUri(_pickImage()) }}
+                            onPress={async () => {
+                                const objj = await getimagepath()
+                                // setImage(obj)
+                                console.log(objj)
+
+                            }}
                         >
                             <Entypo name="camera" size={50} color="white" style={{ alignSelf: 'flex-end', }} />
                         </TouchableOpacity>

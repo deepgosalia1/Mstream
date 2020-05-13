@@ -17,7 +17,7 @@ export default function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      activeColor="#e91e63"
+      activeColor="white"
       labelStyle={{ fontSize: 12 }}
       style={{ backgroundColor: 'tomato' }}
     >
@@ -36,9 +36,9 @@ export default function MyTabs() {
         name="Library"
         component={Library}
         options={{
-          tabBarLabel: 'Library',
+          tabBarLabel: 'My Music',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="bell" color={color} size={26} />
+            <MaterialCommunityIcons name="music" color={color} size={26} style={{ marginTop: -3 }} />
           ),
         }}
       />
