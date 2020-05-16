@@ -1,0 +1,30 @@
+[
+    {
+        "title": "April, 2018",
+        "data": [
+            {
+                "notesTitle": "My Important Findings",
+                "notesMessage":"Communicate in a new way with the S Pen. Create your own animated GIFs and share with friends or on social media.",
+                "notedBy": "By Ellen C. Henry",
+                "notedDate":"April 18,2018 10.00 PM"
+            }
+        ]
+    },
+    {
+        "title": "May, 2018",
+        "data": [
+            {
+                "notesTitle": "My Critical Information",
+                "notesMessage":"Communicate in a new way with the S Pen. Create your own animated GIFs and share with friends or on social media.",
+                "notedBy": "By John Son",
+                "notedDate":"May 15,2018 10.00 PM"
+            },
+            {
+                "notesTitle": "My Important Findings",
+                "notesMessage":"Communicate in a new way with the S Pen. Create your own animated GIFs and share with friends or on social media.",
+                "notedBy": "By Ellen C. Henry",
+                "notedDate":"May 20,2018 10.00 PM"
+            }
+        ]
+    }
+]

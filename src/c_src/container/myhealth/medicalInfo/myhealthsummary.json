@@ -1,0 +1,30 @@
+[
+  {
+    "id": "0",
+    "name":"Medical Illness"
+  },
+  {
+    "id": "1",
+    "name":"Surgery Procedures"
+  },
+  {
+    "id": "2",
+    "name":"Allergies"
+  },
+  {
+    "id": "3",
+    "name": "Family History"
+  },
+  {
+    "id": "4",
+    "name": "Hospital Admission"
+  },
+  {
+    "id": "5",
+    "name": "Pharmacy"
+  },
+  {
+    "id": "6",
+    "name": "Emergency Numbers"
+  }
+]

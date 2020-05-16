@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Father",
+        "disease1":"Suffering from fever Arthistist since April 2000",
+        "disease2":"Suffering from Blood sugar since June 2010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":0   
+    },
+    {
+        "title": "Mother",
+        "disease1":"Suffering from fever Arthistist since April 2000",
+        "disease2":"Suffering from Blood sugar since June 2010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":1  
+    },
+    {
+        "title": "Sister",
+        "disease1":"Suffering from fever Arthistist since April 2000",
+        "disease2":"Suffering from Blood sugar since June 2010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":2
+    },
+    {
+        "title": "Brother",
+        "disease1":"Suffering from fever Arthistist since April 2000",
+        "disease2":"Suffering from Blood sugar since June 2010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":3
+    }
+]
