@@ -1,0 +1,38 @@
+[
+    {
+        "title": "John's Medical",
+        "location":"P.O.Box 94578 Sacramento,CA,94273",
+        "phone":"1-541-754-3010",
+        "fax":"1-541-754-3010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":0  
+    },
+    {
+        "title": "Velama's Medical",
+        "location":"P.O.Box 94578 Sacramento,CA,94273",
+        "phone":"1-541-754-3010",
+        "fax":"1-541-754-3010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":1  
+    },
+    {
+        "title": "Melody's Medical",
+        "location":"P.O.Box 94578 Sacramento,CA,94273",
+        "phone":"1-541-754-3010",
+        "fax":"1-541-754-3010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":2  
+    },
+    {
+        "title": "Anaylysis of urine",
+        "location":"P.O.Box 94578 Sacramento,CA,94273",
+        "phone":"1-541-754-3010",
+        "fax":"1-541-754-3010",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":3  
+    }
+]

@@ -1,0 +1,34 @@
+[
+    {
+        "title": "Atopic Eczema",
+        "date":"Added on 01 June 2009",
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "showActive":true,
+        "id":0
+    },
+    {
+        "title": "Asthama",
+        "date":"Added on 08 June 2010",
+        "showActive":true,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":1
+    },
+    {
+        "title": "Atopic Eczema",
+        "date":"Added on 20 June 2012",
+        "showActive":false,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":2
+    },
+    {
+        "title": "Anaphylaxis",
+        "date":"Added on 20 June 2013",
+        "showActive":true,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":3
+    }
+]
