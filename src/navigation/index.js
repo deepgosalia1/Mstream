@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../components/home';
 import Profile from '../components/profile';
 import Library from '../components/library';
@@ -26,9 +26,9 @@ export default function MyTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
+          // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="home" color={color} size={26} />
+          // ),
         }}
       />
 
@@ -37,9 +37,9 @@ export default function MyTabs() {
         component={Library}
         options={{
           tabBarLabel: 'My Music',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="music" color={color} size={26} style={{ marginTop: -3 }} />
-          ),
+          // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="music" color={color} size={26} style={{ marginTop: -3 }} />
+          // ),
         }}
       />
       <Tab.Screen
@@ -47,9 +47,9 @@ export default function MyTabs() {
         component={Profile}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
+          // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="account" color={color} size={26} />
+          // ),
         }}
       />
     </Tab.Navigator>
