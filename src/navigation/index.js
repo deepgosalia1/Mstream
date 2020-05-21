@@ -16,7 +16,7 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Profile"
       activeColor="green"
       inactiveColor='white'
       labelStyle={{ fontSize: 12 }}

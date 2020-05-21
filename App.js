@@ -10,7 +10,9 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import EditDP from './src/components/editdp';
 import MyTabs from './src/navigation';
+import Profile from './src/components/profile'
 import { YellowBox } from 'react-native';
+import MusicPlayer from './src/components/musicplayer';
 
 
 
@@ -20,5 +22,6 @@ export default function App() {
     <NavigationContainer>
       <MyTabs color={'#3B5998'} />
     </NavigationContainer>
+    // <MusicPlayer />
   );
 }
