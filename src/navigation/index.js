@@ -7,6 +7,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Home from '../components/home';
 import Profile from '../components/profile';
 import Library from '../components/library';
+import Search from '../components/search';
 
 
 
@@ -16,11 +17,12 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
-      activeColor="green"
-      inactiveColor='white'
+      initialRouteName="Home"
+      activeColor="blue"
+      inactiveColor="white"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: '#3b3c36' }}
+      barStyle={{ backgroundColor: 'black' }}
+      // 3b3c36
     >
       <Tab.Screen
         name="Home"
@@ -38,11 +40,28 @@ export default function MyTabs() {
         component={Library}
         options={{
           tabBarLabel: 'My Music',
-          // tabBarIcon: ({ color }) => (
-          //   <MaterialCommunityIcons name="music" color={color} size={26} style={{ marginTop: -3 }} />
-          // ),
+          
+        
         }}
       />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+        }}
+        />
+      {/* <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search', */}
+          {/* // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="account" color={color} size={26} />
+          // ), */}
+        {/* }}
+      /> */}
+      
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -53,6 +72,8 @@ export default function MyTabs() {
           // ),
         }}
       />
+
+
     </Tab.Navigator>
   );
 }

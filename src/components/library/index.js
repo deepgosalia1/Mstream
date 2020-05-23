@@ -21,22 +21,23 @@ import Download from './Download';
 
   export default function MyTabs() {
     return (
-      <Tab.Navigator style={{ paddingTop:35 }}>
+
+      <Tab.Navigator style={{ paddingTop:35,flex: 1, backgroundColor: '#140341' }}
+                      tabBarOptions={{
+                        labelStyle: {fontSize:18},
+                        style: { backgroundColor: '#140341' },
+                        activeTintColor: 'white',
+                        inactiveTintColor: 'white',
+                      }}
+      >
         <Tab.Screen name="Playlists" component={Playlist} />
         <Tab.Screen name="Songs" component={Songs} />
-        <Tab.Screen name="Downloaded" component={Download} />
+        <Tab.Screen name="Download" component={Download} />
+
       </Tab.Navigator>
     );
   }
-    // return (
-    //   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        
-    //     <Text>Notifications!</Text>
-
-    //   </View>
-    // );
-  
-
+   
 
 const styles = StyleSheet.create({
 

@@ -5,6 +5,7 @@ import {
   ScrollView,
   View,
   Text,
+  TouchableOpacity,
   StatusBar,
   Alert,
   Button
@@ -27,17 +28,25 @@ export default function Playlist() {
       setPlaylist(currentList => [...listPlaylist, inputPlaylist]);
   };
     return (
-      <View >
+      <View style={{ flex: 1, backgroundColor: '#140341' }}>
         <View>
-        <Text>Your PLaylists Here!</Text>
+        <TouchableOpacity>
+        <Text style={{ fontSize: 30, color: 'white', width: 300, padding:10}} >
+         Your PLaylists Here !
+        </Text>
+      </TouchableOpacity>
         <TextInput placeholder="Playlist Title"
                   onChangeText={inputPlaylistHandler}
                   value={inputPlaylist}  />
 
         <Button title="Create" onPress ={setPlaylistHandler}    />
         </View>
+        
         <View>
-        {listPlaylist.map((goal)=> <Text>{goal}</Text>)}
+        {listPlaylist.map((goal)=> <TouchableOpacity><Text style={{ fontSize: 30,borderBottomWidth: 5, borderBottomColor: 'white', marginTop: 5, color: 'white', marginLeft: 15, width: 300 }} h5 bold >
+         {goal}
+        </Text>
+      </TouchableOpacity>)}
         </View>
 
       </View> 
