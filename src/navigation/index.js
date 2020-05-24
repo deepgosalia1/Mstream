@@ -10,6 +10,7 @@ import Home from '../components/home';
 import Profile from '../components/profile';
 import Library from '../components/library';
 import DPS from '../components/dpscreen';
+import Search from '../components/search';
 import Appsettings from '../components/appsettings'
 import EditDP from '../components/editdp'
 
@@ -35,20 +36,21 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Profile"
-      activeColor="green"
+      initialRouteName="Home"
+      activeColor="blue"
       inactiveColor="white"
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: '#3b3c36' }}
+      barStyle={{ backgroundColor: 'black' }}
+    // 3b3c36
     >
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home" color={color} size={26} />
-          ),
+          // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="home" color={color} size={26} />
+          // ),
         }}
       />
 
@@ -57,21 +59,40 @@ export default function MyTabs() {
         component={Library}
         options={{
           tabBarLabel: 'My Music',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="music" color={color} size={26} style={{ marginTop: -3 }} />
-          ),
+
+
         }}
       />
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+        }}
+      />
+      {/* <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search', */}
+      {/* // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="account" color={color} size={26} />
+          // ), */}
+      {/* }}
+      /> */}
+
       <Tab.Screen
         name="Profile"
         component={profileStack}
         options={{
           tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
+          // tabBarIcon: ({ color }) => (
+          //   <MaterialCommunityIcons name="account" color={color} size={26} />
+          // ),
         }}
       />
+
+
     </Tab.Navigator>
   );
 }
