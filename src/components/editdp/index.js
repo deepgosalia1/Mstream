@@ -10,8 +10,9 @@ import ImagePicker from 'react-native-image-crop-picker';
 import styles from './style';
 import * as Permissions from 'expo-permissions';
 
-const EditDP = () => {
+const EditDP = ({ route, navigation }) => {
     const [image_obj, setImage] = useState({})
+
 
     function getimagepath() {
         ImagePicker.openPicker({
@@ -20,9 +21,7 @@ const EditDP = () => {
             cropping: true,
             includeBase64: true,
         }).then(image => {
-            // console.log(image)
             setImage(prevObj => image)
-            // console.log(image_obj)
         });
     };
 
@@ -51,7 +50,14 @@ const EditDP = () => {
 
             </View>
             <View style={styles.buttonview}>
-                <Button title="     Done     " style={{ width: 100, justifyContent: 'space-between' }} />
+                <Button
+                    title="     Done     "
+                    style={{ width: 100, justifyContent: 'space-between' }}
+                    onPress={() => {
+                        navigation.goBack()
+                        route.params.updater(`data:${image_obj.mime};base64,${image_obj.data}`)
+                    }}
+                />
             </View>
         </View>
     )

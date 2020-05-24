@@ -8,7 +8,7 @@ var styles = StyleSheet.create({
         flex: 1,
         // paddingTop: (DeviceInfo.hasNotch) ? StatusBar.currentHeight : 0,
     },
-    blur_imageview: { width: '100%', height: '40%', backgroundColor: '#333', flexDirection: "column" },
+    blur_imageview: { width: '100%', height: '40%', backgroundColor: '#333', flexDirection: 'column', marginTop: 45 },
     pro_pic: { marginTop: 15, alignSelf: 'center' },
     pro_picimage: { height: 150, width: 150, borderRadius: 150, alignSelf: 'center' },
     pro_nameview: { width: '100%', alignItems: 'center' },
