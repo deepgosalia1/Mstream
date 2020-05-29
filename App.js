@@ -23,7 +23,5 @@ export default function App() {
     <NavigationContainer>
       <MyTabs color={'#3B5998'} />
     </NavigationContainer>
-    // <MusicPlayer />
-     /* <EditDP /> */
   );
 }

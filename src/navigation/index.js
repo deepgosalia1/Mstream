@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialCommunityIcons, Entypo, Feather } from '@expo/vector-icons'
 import { createStackNavigator } from '@react-navigation/stack';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Home from '../components/home';
 import Profile from '../components/profile';
 import Library from '../components/library';
@@ -27,7 +25,7 @@ function profileStack() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="EditDP" component={EditDP} />
     </ Stack.Navigator>
-  )
+  );
 
 }
 
@@ -38,9 +36,9 @@ export default function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       activeColor="blue"
-      inactiveColor="white"
+      inactiveColor='grey'
       labelStyle={{ fontSize: 12 }}
-      barStyle={{ backgroundColor: 'black' }}
+      barStyle={{ backgroundColor: 'white' }}
     // 3b3c36
     >
       <Tab.Screen
@@ -48,9 +46,20 @@ export default function MyTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          // tabBarIcon: ({ color }) => (
-          //   <MaterialCommunityIcons name="home" color={color} size={26} />
-          // ),
+          tabBarIcon: ({ color }) => (
+            <Entypo name="home" color={color} size={26} />
+          ),
+        }}
+      />
+
+      <Tab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          tabBarLabel: 'Search',
+          tabBarIcon: ({ color }) => (
+            <Feather name="search" color={color} size={26} />
+          ),
         }}
       />
 
@@ -59,36 +68,22 @@ export default function MyTabs() {
         component={Library}
         options={{
           tabBarLabel: 'My Music',
-
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="library-music" color={color} size={26} />
+          ),
 
         }}
       />
-      <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarLabel: 'Search',
-        }}
-      />
-      {/* <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarLabel: 'Search', */}
-      {/* // tabBarIcon: ({ color }) => (
-          //   <MaterialCommunityIcons name="account" color={color} size={26} />
-          // ), */}
-      {/* }}
-      /> */}
+
 
       <Tab.Screen
         name="Profile"
         component={profileStack}
         options={{
           tabBarLabel: 'Profile',
-          // tabBarIcon: ({ color }) => (
-          //   <MaterialCommunityIcons name="account" color={color} size={26} />
-          // ),
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="account" color={color} size={26} />
+          ),
         }}
       />
 
