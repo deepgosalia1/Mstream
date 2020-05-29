@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-vector-icons';
 import { Surface, Card, Portal, Provider } from 'react-native-paper';
+import auth from '@react-native-firebase/auth';
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MaterialIcons, Ionicons, SimpleLineIcons } from '@expo/vector-icons';
 
@@ -93,7 +94,12 @@ export default function Profile({ navigation }) {
         <Surface style={{ elevation: 10, width: '90%', height: 50, alignSelf: 'center', marginTop: 10 }}>
           <TouchableOpacity
             style={{ height: 50 }}
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => {
+              auth()
+                .signOut()
+                .then(() => console.log('User signed out!')).then(Alert.alert("Navigation from here is pending. Refresh from the node server."));
+            }
+            }
           >
             <Card.Title
               style={{ height: 50, flex: 1, marginTop: -10 }}

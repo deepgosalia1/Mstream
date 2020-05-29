@@ -15,7 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "1054951972389-j90q6hvr2ip3ms4t4vbee4knon6uslv8.apps.googleusercontent.com",
+          "client_id": "1054951972389-fuvtu835jc48gvpoc2l1eu6ofhmsg2vd.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mstream",
@@ -40,10 +40,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1054951972389-gi2pokhlhqhk5se0ljeoagmsfvn0ibqe.apps.googleusercontent.com",
+              "client_id": "1054951972389-uv3hq3obdl789bfnk4rc0h3tdlq416oh.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.Mstream"
+                "bundle_id": "org.reactjs.native.example.Mstream"
               }
             }
           ]

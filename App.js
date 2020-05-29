@@ -6,7 +6,7 @@
  * @format
  * @flow strict-local
  */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import EditDP from './src/components/editdp';
@@ -25,11 +25,10 @@ export default function App() {
   console.disableYellowBox = true;
 
   return (
-    <NavigationContainer>
-      <LoginApp />
-      {/* <MyTabs color={'#3B5998'} /> */}
+    // <NavigationContainer>
+    <LoginApp />
 
-    </NavigationContainer>
+    // </NavigationContainer>
     // <MusicPlayer />
     // <EditDP /> 
   );
