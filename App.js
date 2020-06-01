@@ -17,6 +17,7 @@ import { YellowBox } from 'react-native';
 import MusicPlayer from './src/components/musicplayer';
 import auth from "@react-native-firebase/auth";
 import LoginApp from './src/components/login';
+import SignUp from './src/components/signup';
 
 
 
@@ -27,6 +28,7 @@ export default function App() {
   return (
     // <NavigationContainer>
     <LoginApp />
+    // <SignUp />
 
     // </NavigationContainer>
     // <MusicPlayer />

@@ -20,9 +20,8 @@ import { Text, Input, Button } from 'galio-framework';
 import { Surface } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { Divider, Card } from 'react-native-elements';
-import SignUp from '../signup';
 
-export default function LoginApp() {
+export default function SignUp() {
 
   const [inputField, setinput] = useState({email:'',pass:''});
 //   // const [inputPass, setinputPass] = useState('');
@@ -128,16 +127,14 @@ export default function LoginApp() {
                   value={inputField.pass}
                   />
           <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
-                  onPress ={() => loginUser(inputField)}
+                  onPress ={() => createUser(inputField)}
           
           >
-            <Text bold color="white">Login </Text>
+            <Text bold color="white">Sign Up</Text>
           </Button>
          
         </Surface>
         <Divider style={{ height: 1, marginTop: 15, width: '88%', alignSelf: 'center' }} />
-        <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
-                  onPress ={() => {<SignUp />}}><Text>SignUp</Text></Button>
         <TouchableOpacity
           activeOpacity={0.7}
           style={{ borderRadius: 3, marginTop: 15, alignSelf: 'center', height: 50, backgroundColor: 'black' }}
