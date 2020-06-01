@@ -97,7 +97,7 @@ export default function Profile({ navigation }) {
             onPress={() => {
               auth()
                 .signOut()
-                .then(() => console.log('User signed out!')).then(Alert.alert("Navigation from here is pending. Refresh from the node server."));
+                .then(() => console.log('User signed out!'));
             }
             }
           >

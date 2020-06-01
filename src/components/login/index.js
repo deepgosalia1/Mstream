@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
-  View,
   ActivityIndicator,
   TouchableOpacity,
   Image,
@@ -18,70 +17,52 @@ GoogleSignin.configure({
 import auth from '@react-native-firebase/auth';
 import { Text, Input, Button } from 'galio-framework';
 import { Surface } from 'react-native-paper';
-import { Entypo } from '@expo/vector-icons';
-import { Divider, Card } from 'react-native-elements';
-import SignUp from '../signup';
+import { Divider } from 'react-native-elements';
 
-export default function LoginApp() {
+export default function LoginApp({ navigation }) {
 
-  const [inputField, setinput] = useState({email:'',pass:''});
-//   // const [inputPass, setinputPass] = useState('');
+  const [inputField, setinput] = useState({ email: '', pass: '' });
+  //   // const [inputPass, setinputPass] = useState('');
 
 
   const inputEmailHandler = (enteredText) => {
-    if(enteredText.length != 0){
+    if (enteredText.length != 0) {
       setinput({
         ...inputField,
-        email:enteredText,
-        });
+        email: enteredText,
+      });
     }
   };
   const inputPassHandler = (enteredText) => {
-    if(enteredText.length != 0){
+    if (enteredText.length != 0) {
       setinput({
         ...inputField,
-        pass:enteredText,
-        });
+        pass: enteredText,
+      });
     }
   };
 
-  createUser = (inputField) => {
+
+
+  const loginUser = () => {
     auth()
-  .createUserWithEmailAndPassword(inputField.email, inputField.pass)
-  .then(() => {
-    console.log('User account created & signed in!');
-  })
-  .catch(error => {
-    if (error.code === 'auth/email-already-in-use') {
-      console.log('That email address is already in use!');
-    }
+      .signInWithEmailAndPassword(inputField.email, inputField.pass)
+      .then(() => {
+        console.log('User account created & signed in!');
+      })
+      .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+          console.log('That email address is already in use!');
+        }
 
-    if (error.code === 'auth/invalid-email') {
-      console.log('That email address is invalid!');
-    }
+        if (error.code === 'auth/invalid-email') {
+          console.log('That email address is invalid!');
+        }
 
-    console.error(error);
-  });
+        console.error(error);
+      });
   }
-  loginUser = () => {
-    auth()
-  .signInWithEmailAndPassword('shahnavkar15@gmail.com', '123456')
-  .then(() => {
-    console.log('User account created & signed in!');
-  })
-  .catch(error => {
-    if (error.code === 'auth/email-already-in-use') {
-      console.log('That email address is already in use!');
-    }
 
-    if (error.code === 'auth/invalid-email') {
-      console.log('That email address is invalid!');
-    }
-
-    console.error(error);
-  });
-  }
-  
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
@@ -107,57 +88,56 @@ export default function LoginApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (initializing) { return <ActivityIndicator size={'large'} />; }
+  if (initializing && !user) { return <ActivityIndicator size={'large'} />; }
 
   if (!user) {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-        <Surface style={{ elevation: 5, backgroundColor: '#0080ff', height: 200, width: '100%', flexDirection: 'column', alignSelf: 'center', justifyContent: 'center' }}>
-          <Text center h3 color="white" size={45}> Welcome </Text>
-          <Text h3 center color="white"> to </Text>
-          <Text h2 center bold color="white"> MStream ! </Text>
-        </Surface>
-        <Surface style={{ flexDirection: 'column', width: '85%', alignSelf: 'center', marginTop: 15 }}>
-          <Input placeholder="Email ID" rounded 
-                  onChangeText={(val)=> inputEmailHandler(val)}
-                  value = {inputField.email}
-                  />
-          <Input placeholder="Password" rounded password 
-                  secureTextEntry={true}
-                  onChangeText={(val)=> inputPassHandler(val)}
-                  value={inputField.pass}
-                  />
-          <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
-                  onPress ={() => loginUser(inputField)}
-          
-          >
-            <Text bold color="white">Login </Text>
-          </Button>
-         
-        </Surface>
-        <Divider style={{ height: 1, marginTop: 15, width: '88%', alignSelf: 'center' }} />
-        <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
-                  onPress ={() => {<SignUp />}}><Text>SignUp</Text></Button>
-        <TouchableOpacity
-          activeOpacity={0.7}
-          style={{ borderRadius: 3, marginTop: 15, alignSelf: 'center', height: 50, backgroundColor: 'black' }}
-          onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-        >
-          <Surface style={{ flex: 1, borderRadius: 3, backgroundColor: 'blue', elevation: 8, flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
-            <Image source={require('../../assets/images/google2.png')} style={{ width: 30, height: 30, margin: 25 }} />
-            <Text bold color="white" h6 style={{ width: 200 }}> Login using Google </Text>
+      <NavigationContainer independent={true}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+          <Surface style={{ elevation: 5, backgroundColor: '#0080ff', height: 200, width: '100%', flexDirection: 'column', alignSelf: 'center', justifyContent: 'center' }}>
+            <Text center h3 color="white" size={45}> Welcome </Text>
+            <Text h3 center color="white"> to </Text>
+            <Text h2 center bold color="white"> MStream ! </Text>
           </Surface>
-        </TouchableOpacity>
-      </SafeAreaView>
+          <Surface style={{ flexDirection: 'column', width: '85%', alignSelf: 'center', marginTop: 15 }}>
+            <Input placeholder="Email ID" rounded
+              onChangeText={(val) => inputEmailHandler(val)}
+              value={inputField.email}
+            />
+            <Input placeholder="Password" rounded password
+              secureTextEntry={true}
+              onChangeText={(val) => inputPassHandler(val)}
+              value={inputField.pass}
+            />
+            <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
+              onPress={() => loginUser(inputField)}
+
+            >
+              <Text bold color="white">Login </Text>
+            </Button>
+
+          </Surface>
+          <Divider style={{ height: 1, marginTop: 15, width: '88%', alignSelf: 'center' }} />
+          <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
+            onPress={() => { navigation.navigate('SignupScreen') }}><Text> Sign Up </Text></Button>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={{ borderRadius: 3, marginTop: 15, alignSelf: 'center', height: 50, backgroundColor: 'black' }}
+            onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+          >
+            <Surface style={{ flex: 1, borderRadius: 3, backgroundColor: 'blue', elevation: 8, flexDirection: 'row', justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+              <Image source={require('../../assets/images/google2.png')} style={{ width: 30, height: 30, margin: 25 }} />
+              <Text bold color="white" h6 style={{ width: 200 }}> Login using Google </Text>
+            </Surface>
+          </TouchableOpacity>
+        </SafeAreaView>
+      </NavigationContainer>
     )
   }
 
   return (
-   
-    <NavigationContainer>
-      <SafeAreaView style={{ flex: 1 }} >
-        <MyTabs color={'#3B5998'} />
-      </SafeAreaView>
-    </NavigationContainer>
+    <SafeAreaView style={{ flex: 1 }} >
+      <MyTabs color={'#3B5998'} />
+    </SafeAreaView>
   );
 }
