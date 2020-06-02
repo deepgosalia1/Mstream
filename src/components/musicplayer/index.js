@@ -1,22 +1,33 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar, Dimensions, Modal } from 'react-native';
+import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar, Dimensions, Modal, Button } from 'react-native';
 import Slider from 'react-native-slider';
 import Moment from 'moment';
 import DeviceInfo from 'react-native-device-info'
-import { FontAwesome5, Feather, Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './style';
-import { Surface, DarkTheme, Card, Badge } from 'react-native-paper';
-import { Overlay } from 'react-native-elements'
+import { FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
+import { Surface, Card, Badge } from 'react-native-paper';
+import TrackPlayer, { } from 'react-native-track-player';
 
 export default class MusicPlayer extends React.Component {
-    state = {
-        trackLength: 300,
-        timeElapsed: '0:00',
-        timeRemaining: '5:00',
-        optionsVisible: false,
+    constructor(props) {
+        super(props);
+        this.state = {
+            trackLength: 300,
+            timeElapsed: '0:00',
+            timeRemaining: '5:00',
+            optionsVisible: false,
+            isPlaying: false,
+        };
+        TrackPlayer.setupPlayer().then(async () => {
+            await TrackPlayer.add({
+                url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
+                // url: 'gs://mstream-9122e.appspot.com/Songs/01 - Dulha Mil Gaya.mp3',
+            });
+            // console.log(await TrackPlayer.getState());
+        }
+        );
 
-    };
+    }
 
     changeTime = seconds => {
         this.setState({ timeElapsed: Moment.utc(seconds * 1000).format('m:ss') });
@@ -27,23 +38,29 @@ export default class MusicPlayer extends React.Component {
         this.setState({ optionsVisible: !this.state.optionsVisible })
     }
 
-    showModal = () => {
-        return (
-            <Overlay
-                isVisible={this.state.optionsVisible}
-                onBackdropPress={this.toggleOverlay}
-            >
-                <Text>Text shown Modal displayed!</Text>
-            </Overlay>
-        )
-
-    }
     render() {
-        // eslint-disable-next-line no-lone-blocks
-        { console.log(this.state.optionsVisible); }
+
         return (
             <SafeAreaView style={{ backgroundColor: '#2d545e', flex: 1, paddingTop: (DeviceInfo.hasNotch && Platform.OS === 'android') ? StatusBar.currentHeight : 0 }}>
                 <View style={{ margin: 3, flex: 1 }}>
+                    <Modal
+                        visible={this.state.optionsVisible}
+                        transparent={true}
+                        animated={true}
+                    >
+                        <View style={{ backgroundColor: '#000000bc', flex: 1, alignItems: 'center', alignContent: 'center' }}>
+                            <View
+                                style={{ height: 250, width: 350, margin: 50, padding: 40, borderRadius: 10, backgroundColor: 'white', marginTop: 150, alignSelf: 'center', justifyContent: 'space-between', flexDirection: 'column' }}
+                            >
+                                <Text style={{ fontSize: 22, textAlign: 'center' }} >In-order to receive support, please contact us at </Text>
+                                <Button
+                                    onPress={this.toggleOverlay}
+                                    title={'Close'}
+                                    color={'purple'}
+                                />
+                            </View>
+                        </View>
+                    </Modal>
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', marginRight: 10 }}
                         onPress={this.toggleOverlay} >
@@ -93,18 +110,28 @@ export default class MusicPlayer extends React.Component {
                                 style={{ alignItems: 'center' }}
                             />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }}>
+                        <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }} onPress={() => TrackPlayer.skipToPrevious()}>
                             <FontAwesome5 name="backward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
                         </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}>
+
+                        {!this.state.isPlaying && <TouchableOpacity style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }} onPress={() => TrackPlayer.play().then(this.setState({ isPlaying: true }))}>
                             <FontAwesome5
                                 name="play"
                                 size={38}
                                 color="#000000"
                                 style={{ marginTop: 5 }}
                             />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }}>
+                        </TouchableOpacity>}
+                        {this.state.isPlaying && <TouchableOpacity style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }} onPress={() => TrackPlayer.pause().then(this.setState({ isPlaying: false }))}>
+                            <FontAwesome5
+                                name="pause"
+                                size={38}
+                                color="#000000"
+                                style={{ marginTop: 5 }}
+                            />
+                        </TouchableOpacity>}
+
+                        <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }} onPress={() => TrackPlayer.skipToNext()}>
                             <FontAwesome5 name="forward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
                         </TouchableOpacity>
                         <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}>
