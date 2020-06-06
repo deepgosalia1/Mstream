@@ -6,9 +6,12 @@ import Moment from 'moment';
 import DeviceInfo from 'react-native-device-info'
 import { FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
 import { Surface, Card, Badge } from 'react-native-paper';
-import TrackPlayer, { } from 'react-native-track-player';
+import TrackPlayer, { ProgressComponent, getPosition } from 'react-native-track-player';
+import storage from '@react-native-firebase/storage';
 
-export default class MusicPlayer extends React.Component {
+export default class MusicPlayer extends ProgressComponent {
+
+    //USE COMPONENT DID MOUNT u dumbass
     constructor(props) {
         super(props);
         this.state = {
@@ -16,30 +19,38 @@ export default class MusicPlayer extends React.Component {
             timeElapsed: '0:00',
             timeRemaining: '5:00',
             optionsVisible: false,
+            curr_time: 0,
             isPlaying: false,
         };
         TrackPlayer.setupPlayer().then(async () => {
             await TrackPlayer.add({
-                url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
-                // url: 'gs://mstream-9122e.appspot.com/Songs/01 - Dulha Mil Gaya.mp3',
+                // url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
+                url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
+                // title: 'Luck Aazma', // (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getName(),
+                // artist: 'Codeaxes', // (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getTitle(),
+                // artwork: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' //(await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getTitle(),
             });
-            // console.log(await TrackPlayer.getState());
         }
-        );
+        ).then(console.log('aaaaaaaaaaaaaaaaaaaaaaa'));
 
     }
-
-    changeTime = seconds => {
+    seekTime = seconds => {
         this.setState({ timeElapsed: Moment.utc(seconds * 1000).format('m:ss') });
+        TrackPlayer.seekTo(seconds)
         this.setState({ timeRemaining: Moment.utc((this.state.trackLength - seconds) * 1000).format('m:ss') });
     };
+    setCurr = seconds => {
+        return Moment.utc(seconds * 1000).format('m:ss');
+    };
+
 
     toggleOverlay = () => {
         this.setState({ optionsVisible: !this.state.optionsVisible })
     }
 
     render() {
-
+        // console.log(TrackPlayer.getDuration())
+        // console.log("the pos: " + this.state.position)
         return (
             <SafeAreaView style={{ backgroundColor: '#2d545e', flex: 1, paddingTop: (DeviceInfo.hasNotch && Platform.OS === 'android') ? StatusBar.currentHeight : 0 }}>
                 <View style={{ margin: 3, flex: 1 }}>
@@ -74,7 +85,7 @@ export default class MusicPlayer extends React.Component {
 
                     {/* song image/ thumbnail zone */}
                     <Surface raised style={{ marginTop: 30, height: 200, width: 200, alignSelf: 'center', elevation: 50, borderRadius: 30 }}>
-                        <Image source={require('../../assets/images/temp.jpeg')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
+                        <Image source={{ uri: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' } || require('../../assets/images/temp.jpeg')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
                     </Surface>
 
                     {/* song name and artist name */}
@@ -87,16 +98,18 @@ export default class MusicPlayer extends React.Component {
                     <View style={{ flexDirection: 'column', alignItems: 'center', marginTop: 8 }}>
                         <Slider
                             minimumValue={0}
+                            value={this.state.position}
+                            animationType="timing"
                             maximumValue={this.state.trackLength}
                             trackStyle={{ width: Dimensions.get('screen').width - 50, height: 4 }}
                             thumbStyle={{ height: 20, width: 20, backgroundColor: '#fff' }}
                             thumbTouchSize={{ width: 100, height: 40 }}
                             minimumTrackTintColor="#000000"
-                            onValueChange={seconds => this.changeTime(seconds)}
+                            onSlidingComplete={seconds => { console.log(seconds); this.seekTime(seconds); }}
                         />
                         <View style={{ width: Dimensions.get('screen').width - 35, backgroundColor: '#', flexDirection: 'row', justifyContent: 'space-between' }}>
-                            <Text style={{ flex: 1 }}>{this.state.timeElapsed}</Text>
-                            <Text style={{ alignSelf: 'flex-end' }}>{this.state.timeRemaining}</Text>
+                            <Text style={{ flex: 1 }}>{this.setCurr(this.state.position)}</Text>
+                            <Text style={{ alignSelf: 'flex-end' }}>{this.setCurr(this.state.trackLength)}</Text>
                         </View>
                     </View>
 
@@ -113,8 +126,16 @@ export default class MusicPlayer extends React.Component {
                         <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }} onPress={() => TrackPlayer.skipToPrevious()}>
                             <FontAwesome5 name="backward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
                         </TouchableOpacity>
+                        {!this.state.isPlaying && <TouchableOpacity
+                            style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}
+                            onPress={async () => {
+                                TrackPlayer.play().then(this.setState({ isPlaying: true })).then(async () => {
+                                    var dur = (await TrackPlayer.getDuration()).toString();
+                                    this.setState({ trackLength: dur });
+                                })
 
-                        {!this.state.isPlaying && <TouchableOpacity style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }} onPress={() => TrackPlayer.play().then(this.setState({ isPlaying: true }))}>
+                            }}
+                        >
                             <FontAwesome5
                                 name="play"
                                 size={38}
@@ -130,7 +151,6 @@ export default class MusicPlayer extends React.Component {
                                 style={{ marginTop: 5 }}
                             />
                         </TouchableOpacity>}
-
                         <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }} onPress={() => TrackPlayer.skipToNext()}>
                             <FontAwesome5 name="forward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
                         </TouchableOpacity>

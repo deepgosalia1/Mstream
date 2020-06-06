@@ -15,6 +15,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Music from './src/components/newMusic'
 import MusicPlayer from './src/components/musicplayer'
 import TrackPlayer from 'react-native-track-player';
+import storage from '@react-native-firebase/storage';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
