@@ -23,7 +23,7 @@ export default function Music() {
 
 
                 console.log(storage().ref(ref.fullPath).getDownloadURL());
-                console.log('__________________________________________________')
+                console.log('__________________________________________________');
                 // isBreakStatement;
             });
 
@@ -53,14 +53,19 @@ export default function Music() {
         }
     );
     return (
+
         <View style={{ flex: 1, backgroundColor: 'grey' }}>
             <Button title={'Play me!'} onPress={() => TrackPlayer.play().then(async () => {
-                var dur = await TrackPlayer.getDuration()
-                console.log('dur: ' + dur)
+                var dur = await TrackPlayer.getDuration();
+                console.log('dur: ' + dur);
+                if (await TrackPlayer.getState() === TrackPlayer.STATE_PLAYING) { console.log('its playing') }
+                if (await TrackPlayer.getState() === TrackPlayer.STATE_BUFFERING) { console.log('its buffering') }
             })} />
-            <Button title={'Pause me!'} onPress={() => {
-                console.log("hhh: " + TrackPlayer.getPosition().then((res) => console.log("moment ka part is :" + Moment.utc(res * 1000).format('m:ss'))));
-                TrackPlayer.pause()
+            <Button title={'Pause me!'} onPress={async () => {
+                console.log('hhh: ' + TrackPlayer.getPosition().then((res) => console.log('moment ka part is :' + Moment.utc(res * 1000).format('m:ss'))));
+                await TrackPlayer.pause();
+                TrackPlayer.getState().then((res) => console.log("state " + res));
+                if (await TrackPlayer.getState() === TrackPlayer.STATE_PAUSED) { console.log('its paused') }
                 // console.log('dur is : ' + duration)
 
             }} />

@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, View, Image, SafeAreaView, TouchableOpacity, Platform, StatusBar, Dimensions, Modal, Button } from 'react-native';
 import Slider from 'react-native-slider';
 import Moment from 'moment';
-import DeviceInfo from 'react-native-device-info'
+import DeviceInfo from 'react-native-device-info';
 import { FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
 import { Surface, Card, Badge } from 'react-native-paper';
 import TrackPlayer, { ProgressComponent, getPosition } from 'react-native-track-player';
@@ -11,6 +11,31 @@ import storage from '@react-native-firebase/storage';
 
 export default class MusicPlayer extends ProgressComponent {
 
+    componentWillMount() {
+        TrackPlayer.setupPlayer().then(async () => {
+            await TrackPlayer.add({
+                // url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
+                url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
+            });
+        }
+        ).then(console.log('aaaaaaaaaaaaaaaaaaaaaaa ' + this.getS().then(res => console.log(res))));
+        // .then(async () => {
+        //     var dur = (await TrackPlayer.getDuration()).toString();
+        //     this.setState({ trackLength: dur });
+        // });
+        // const temp = await TrackPlayer.getState();
+        // if (temp === TrackPlayer.STATE_READY) { console.log('its ready here') }
+    }
+    // componentDidMount() {
+    //     this.interval = setInterval(
+    //         () => {
+    //             this.forceUpdate;
+    //         }, 3500
+    //     );
+    // }
+    // componentWillUnmount() {
+    //     clearInterval(this.interval);
+    // }
     //USE COMPONENT DID MOUNT u dumbass
     constructor(props) {
         super(props);
@@ -21,36 +46,24 @@ export default class MusicPlayer extends ProgressComponent {
             optionsVisible: false,
             curr_time: 0,
             isPlaying: false,
+            t_state: this.getS(),
         };
-        TrackPlayer.setupPlayer().then(async () => {
-            await TrackPlayer.add({
-                // url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
-                url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
-                // title: 'Luck Aazma', // (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getName(),
-                // artist: 'Codeaxes', // (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getTitle(),
-                // artwork: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' //(await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getTitle(),
-            });
-        }
-        ).then(console.log('aaaaaaaaaaaaaaaaaaaaaaa'));
-
     }
     seekTime = seconds => {
         this.setState({ timeElapsed: Moment.utc(seconds * 1000).format('m:ss') });
-        TrackPlayer.seekTo(seconds)
+        TrackPlayer.seekTo(seconds);
         this.setState({ timeRemaining: Moment.utc((this.state.trackLength - seconds) * 1000).format('m:ss') });
     };
     setCurr = seconds => {
         return Moment.utc(seconds * 1000).format('m:ss');
     };
-
-
     toggleOverlay = () => {
-        this.setState({ optionsVisible: !this.state.optionsVisible })
+        this.setState({ optionsVisible: !this.state.optionsVisible });
     }
-
+    getS = async () => {
+        return await TrackPlayer.getState();
+    }
     render() {
-        // console.log(TrackPlayer.getDuration())
-        // console.log("the pos: " + this.state.position)
         return (
             <SafeAreaView style={{ backgroundColor: '#2d545e', flex: 1, paddingTop: (DeviceInfo.hasNotch && Platform.OS === 'android') ? StatusBar.currentHeight : 0 }}>
                 <View style={{ margin: 3, flex: 1 }}>
@@ -126,23 +139,26 @@ export default class MusicPlayer extends ProgressComponent {
                         <TouchableOpacity style={{ flex: 1, height: 30, width: 10, alignSelf: 'center', justifyContent: 'space-between' }} onPress={() => TrackPlayer.skipToPrevious()}>
                             <FontAwesome5 name="backward" size={32} color="#242320" style={{ alignSelf: 'center' }} />
                         </TouchableOpacity>
-                        {!this.state.isPlaying && <TouchableOpacity
-                            style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}
-                            onPress={async () => {
-                                TrackPlayer.play().then(this.setState({ isPlaying: true })).then(async () => {
-                                    var dur = (await TrackPlayer.getDuration()).toString();
-                                    this.setState({ trackLength: dur });
-                                })
-
-                            }}
-                        >
-                            <FontAwesome5
-                                name="play"
-                                size={38}
-                                color="#000000"
-                                style={{ marginTop: 5 }}
-                            />
-                        </TouchableOpacity>}
+                        {
+                            // this.state.t_state === TrackPlayer.STATE_READY && 
+                            !this.state.isPlaying && <TouchableOpacity
+                                style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }}
+                                onPress={async () => {
+                                    TrackPlayer.play().then(this.setState({ isPlaying: true })).then(() => {
+                                        setInterval(async () => {
+                                            var dur = (await TrackPlayer.getDuration()).toString();
+                                            this.setState({ trackLength: dur });
+                                        }, 3000);
+                                    });
+                                }}
+                            >
+                                <FontAwesome5
+                                    name="play"
+                                    size={38}
+                                    color="#000000"
+                                    style={{ marginTop: 5 }}
+                                />
+                            </TouchableOpacity>}
                         {this.state.isPlaying && <TouchableOpacity style={{ flex: 1, height: 50, alignSelf: 'center', justifyContent: 'space-between', alignItems: 'center' }} onPress={() => TrackPlayer.pause().then(this.setState({ isPlaying: false }))}>
                             <FontAwesome5
                                 name="pause"
