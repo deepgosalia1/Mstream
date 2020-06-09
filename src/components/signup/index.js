@@ -21,11 +21,13 @@ import { Surface } from 'react-native-paper';
 import { Entypo } from '@expo/vector-icons';
 import { Divider, Card } from 'react-native-elements';
 
+import database from '@react-native-firebase/database';
+
+
+
 export default function SignUp({ navigation }) {
 
   const [inputField, setinput] = useState({ email: '', pass: '' });
-  //   // const [inputPass, setinputPass] = useState('');
-
 
   const inputEmailHandler = (enteredText) => {
     if (enteredText.length != 0) {
@@ -49,6 +51,24 @@ export default function SignUp({ navigation }) {
       .createUserWithEmailAndPassword(inputField.email, inputField.pass)
       .then(() => {
         console.log('User account created & signed in!');
+        const user = auth().currentUser;
+        database()
+        .ref('/users/'+user.uid)
+        .set({
+          name: user.email,
+          dob: '',
+          phone: 0,
+          email: user.email,
+          
+        })
+        .then(() => {
+          database()
+          .ref('/playlist/'+user.uid)
+          .set({
+            demo : 123
+          })
+        });
+
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -62,14 +82,6 @@ export default function SignUp({ navigation }) {
         console.error(error);
       });
   }
-
-  // const [initializing, setInitializing] = useState(true);
-  // const [user, setUser] = useState();
-
-  // function onAuthStateChanged(user) {
-  //   setUser(user);
-  //   if (initializing) { setInitializing(false); }
-  // }
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>

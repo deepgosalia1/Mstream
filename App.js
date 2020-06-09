@@ -28,11 +28,11 @@ const Signupstack = () => {
 
 export default function App() {
   console.disableYellowBox = true;
-  TrackPlayer.setupPlayer()
+  // TrackPlayer.setupPlayer()
   return (
     <NavigationContainer independent={true}>
-      {/* <Signupstack /> */}
-      <MusicPlayer />
+      <Signupstack />
+      {/* <MusicPlayer /> */}
     </NavigationContainer>
   );
 }

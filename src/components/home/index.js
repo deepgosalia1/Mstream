@@ -24,11 +24,20 @@ import { Image, Card, ListItem } from 'react-native-elements'
 import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons, SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 
+import auth, { firebase } from '@react-native-firebase/auth';
+
+
 
 export default function Home() {
-
+  
+ 
   const [isplaying, setPlay] = useState(0)
   const [carouselimage, setImage] = useState(0)
+  const user = auth().currentUser;
+  if(user){
+    console.log(user.uid)
+  }
+
   let playButton;
   if (isplaying) {
     playButton = <FontAwesome name="pause-circle" size={48} color="white" />
@@ -75,6 +84,7 @@ export default function Home() {
       {/* Banner Carousal start */}
 
       <View style={{ height: 152, width: '85%', alignSelf: 'center', marginTop: 10 }}>
+       
         <Carousel
           style={{}}
           autoplayInterval={2500}
