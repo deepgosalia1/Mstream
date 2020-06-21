@@ -16,6 +16,8 @@ import Music from './src/components/newMusic'
 import MusicPlayer from './src/components/musicplayer'
 import TrackPlayer from 'react-native-track-player';
 import storage from '@react-native-firebase/storage';
+import YourScreen from './src/components/library/YourScreen';
+import HCI from './src/customRootComponents/homeCardImage'
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -31,9 +33,10 @@ export default function App() {
   console.disableYellowBox = true;
   // TrackPlayer.setupPlayer()
   return (
-    <NavigationContainer independent={true}>
-      <Signupstack />
-      {/* <MusicPlayer /> */}
-    </NavigationContainer>
+    // <NavigationContainer independent={true}>
+    //   <Signupstack />
+    //   {/* <YourScreen/> */}
+    // </NavigationContainer>
+    <HCI/>
   );
 }

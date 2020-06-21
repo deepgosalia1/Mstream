@@ -19,24 +19,7 @@ export default class MusicPlayer extends ProgressComponent {
             });
         }
         ).then(console.log('aaaaaaaaaaaaaaaaaaaaaaa ' + this.getS().then(res => console.log(res))));
-        // .then(async () => {
-        //     var dur = (await TrackPlayer.getDuration()).toString();
-        //     this.setState({ trackLength: dur });
-        // });
-        // const temp = await TrackPlayer.getState();
-        // if (temp === TrackPlayer.STATE_READY) { console.log('its ready here') }
     }
-    // componentDidMount() {
-    //     this.interval = setInterval(
-    //         () => {
-    //             this.forceUpdate;
-    //         }, 3500
-    //     );
-    // }
-    // componentWillUnmount() {
-    //     clearInterval(this.interval);
-    // }
-    //USE COMPONENT DID MOUNT u dumbass
     constructor(props) {
         super(props);
         this.state = {
