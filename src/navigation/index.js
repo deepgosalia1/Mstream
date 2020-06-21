@@ -84,9 +84,7 @@ export default function MyTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (
-            <Entypo name="home" color={color} size={26} />
-          ),
+          tabBarIcon: ({ color }) => (  <Entypo name="home" color={color} size={26} />),
         }}
       />
 
@@ -96,8 +94,7 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Search',
           tabBarIcon: ({ color }) => (
-            <Feather name="search" color={color} size={26} />
-          ),
+            <Feather name="search" color={color} size={26} />),
         }}
       />
 
@@ -107,12 +104,9 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'My Music',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="library-music" color={color} size={26} />
-          ),
-
+            <MaterialCommunityIcons name="library-music" color={color} size={26} />),
         }}
       />
-
 
       <Tab.Screen
         name="Profile"
@@ -120,12 +114,9 @@ export default function MyTabs() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={26} />
-          ),
+            <MaterialCommunityIcons name="account" color={color} size={26} />),
         }}
       />
-
-
     </Tab.Navigator>
   );
 }

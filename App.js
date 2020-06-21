@@ -18,6 +18,7 @@ import TrackPlayer from 'react-native-track-player';
 import storage from '@react-native-firebase/storage';
 import YourScreen from './src/components/library/YourScreen';
 import HCI from './src/customRootComponents/homeCardImage'
+import Playlist_Section from './src/components/playlist_section';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
