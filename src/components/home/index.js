@@ -23,7 +23,7 @@ import { useState } from 'react';
 import { Image, Card, ListItem } from 'react-native-elements'
 import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons, SimpleLineIcons, Ionicons } from '@expo/vector-icons';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
-
+import CImage from '../../customRootComponents/CImage'
 import auth, { firebase } from '@react-native-firebase/auth';
 
 
@@ -98,13 +98,15 @@ export default function Home() {
             ({ item }) => (
               <Block card flex style={{ alignSelf: 'flex-end', width: '100%' }}>
                 {/* {setImage(prev => item.id)} */}
-                <Image
+                <CImage
+                  uri={item.image}
                   style={{ height: 150, width: 350 }}
-                  source={{ uri: item.image }}
-                  PlaceholderContent={<ActivityIndicator />}
-                  borderRadius={5}
-                  resizeMethod="resize"
-                  resizeMode="cover"
+                  defaultsource={'../../assets/images/musicicon'}
+                  // source={{ uri: item.image }}
+                  // PlaceholderContent={<ActivityIndicator />}
+                  // borderRadius={5}
+                  // resizeMethod="resize"
+                  // resizeMode="cover"
                 />
               </Block>
             )
@@ -303,22 +305,3 @@ export default function Home() {
 
   );
 }
-
-const styles = StyleSheet.create({
-
-  container: {
-    justifyContent: "center",
-    alignItems: "center",
-    textAlignVertical: 'center',
-    fontSize: 50
-  },
-  textdisplay: {
-    textAlign: "center",
-    fontSize: 50,
-
-  },
-}
-);
-// 1800111345
-// 18002093345
-// 18002091345

@@ -3,15 +3,54 @@
 import * as React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Entypo, Feather } from '@expo/vector-icons'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../components/home';
 import Profile from '../components/profile';
-import Library from '../components/library';
 import DPS from '../components/dpscreen';
 import Search from '../components/search';
 import Appsettings from '../components/appsettings'
 import EditDP from '../components/editdp'
+import Playlist from '../components/library/Playlist';
+import Songs from '../components/library/Songs';
+import YourScreen from '../components/library/YourScreen';
+import UploadsList from '../components/library/YourScreen/uploads';
+import MeFollow from '../components/library/YourScreen/youarefollowing';
 
+function youStack() {
+  const Stack = createStackNavigator();
+
+  return (
+    <Stack.Navigator screenOptions={{ headerStyle: { height: 45, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
+      <Stack.Screen options={{headerShown: false}} name="You" component={YourScreen} />
+      <Stack.Screen name="UploadsList" component={UploadsList} />
+      <Stack.Screen name="MeFollow" component={MeFollow} />
+    </ Stack.Navigator>
+  );
+}
+
+function libraryTabs() {
+  const Tab = createMaterialTopTabNavigator();
+
+  return (
+
+    <Tab.Navigator style={{ paddingTop:35,flex: 1, backgroundColor: '#140341' }}
+    tabBarOptions={{
+      labelStyle: {fontSize:18},
+      style: { backgroundColor: '#140341' },
+      activeTintColor: 'white',
+      inactiveTintColor: 'white',
+    }}
+    initialRouteName='YouStack'
+    >
+      <Tab.Screen name="Playlists" component={Playlist} />
+      <Tab.Screen name="Songs" component={Songs} />
+      <Tab.Screen name="YouStack" component={youStack} />
+
+    </Tab.Navigator>
+  );
+}
+ 
 
 function profileStack() {
   const Stack = createStackNavigator();
@@ -34,7 +73,7 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Library"
       activeColor="blue"
       inactiveColor='grey'
       labelStyle={{ fontSize: 12 }}
@@ -62,7 +101,7 @@ export default function MyTabs() {
 
       <Tab.Screen
         name="Library"
-        component={Library}
+        component={libraryTabs}
         options={{
           tabBarLabel: 'My Music',
           tabBarIcon: ({ color }) => (
