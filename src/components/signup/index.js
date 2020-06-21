@@ -28,7 +28,6 @@ import database from '@react-native-firebase/database';
 export default function SignUp({ navigation }) {
 
   const [inputField, setinput] = useState({ email: '', pass: '' });
-
   const inputEmailHandler = (enteredText) => {
     if (enteredText.length != 0) {
       setinput({
@@ -45,7 +44,6 @@ export default function SignUp({ navigation }) {
       });
     }
   };
-
   const createUser = (inputField) => {
     auth()
       .createUserWithEmailAndPassword(inputField.email, inputField.pass)
@@ -59,7 +57,6 @@ export default function SignUp({ navigation }) {
           dob: '',
           phone: 0,
           email: user.email,
-          
         })
         .then(() => {
           database()
@@ -75,10 +72,7 @@ export default function SignUp({ navigation }) {
           console.log('That email address is already in use!');
         }
 
-        if (error.code === 'auth/invalid-email') {
-          console.log('That email address is invalid!');
-        }
-
+        if (error.code === 'auth/invalid-email') {console.log('That email address is invalid!'); }
         console.error(error);
       });
   }
@@ -105,8 +99,7 @@ export default function SignUp({ navigation }) {
             () => {
               createUser(inputField)
               navigation.navigate('SignInScreen')
-            }}
-        >
+            }} >
           <Text bold color="white">Sign Up </Text>
         </Button>
 

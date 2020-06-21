@@ -16,6 +16,7 @@ import Music from './src/components/newMusic'
 import MusicPlayer from './src/components/musicplayer'
 import TrackPlayer from 'react-native-track-player';
 import storage from '@react-native-firebase/storage';
+import Playlist_Section from './src/components/playlist_section';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Signupstack />
+      {/* <Playlist_Section /> */}
       {/* <MusicPlayer /> */}
     </NavigationContainer>
   );

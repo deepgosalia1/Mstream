@@ -113,7 +113,6 @@ export default function LoginApp({ navigation }) {
             />
             <Button radius={15} round size="small" style={{ width: 100, marginTop: 15, alignSelf: 'center' }} color="green"
               onPress={() => loginUser(inputField)}
-
             >
               <Text bold color="white">Login </Text>
             </Button>
