@@ -21,7 +21,7 @@ import auth from '@react-native-firebase/auth';
 import { getTokenSourceMapRange } from 'typescript';
 
 
-export default function Playlist() {
+export default function Playlist({navigation}) {
   const user = auth().currentUser;
   const [input, setinput] = useState('');
   const [list, displayList] = useState([]);
@@ -76,6 +76,15 @@ export default function Playlist() {
     );
   }
 
+
+function playlistStack(){
+  const Stack = createStackNavigator();
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="PlaylistSection" component={Playlist_Section}/>
+    </Stack.Navigator>
+  )
+}
   // useEffect(() => {
   //   database()
   //   .ref()
@@ -128,12 +137,10 @@ export default function Playlist() {
       </View>
 
       <View style={{marginBottom:150}}>
-        {/* {list.map((item) => <Text>{item.name}</Text>)} */}
-        {/* {listPlaylist.map((goal)=> <Text style={styles.playlist} h5 bold > {goal} </Text>)} */}
         <FlatList
             data = {list}
             renderItem={({item})=>(<TouchableOpacity onLongPress={onDelete.bind(this,item)}
-            onPress={navigation.navigate('Signup')}>
+            onPress={navigation.navigate('PlaylistSection',{item})}>
                                       <View>
                                         <Text style={styles.listdisplay }>{item.name}</Text>
                                       </View>

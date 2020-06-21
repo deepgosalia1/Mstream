@@ -20,8 +20,8 @@ import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import { getTokenSourceMapRange } from 'typescript';
 
-
-export default function Playlist_Section({navigation}) {
+export default function PlaylistSection({route,navigation}) {
+  const {item} = route.params;
   const user = auth().currentUser;
   const [input, setinput] = useState('');
   const [list, displayList] = useState([]);

@@ -13,7 +13,6 @@ import Appsettings from '../components/appsettings'
 import EditDP from '../components/editdp'
 
 
-
 function profileStack() {
   const Stack = createStackNavigator();
 
@@ -28,6 +27,7 @@ function profileStack() {
   );
 
 }
+
 
 export default function MyTabs() {
   const Tab = createMaterialBottomTabNavigator();
