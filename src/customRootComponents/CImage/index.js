@@ -1,7 +1,7 @@
 import React from 'react';
 import {ActivityIndicator, View, Image} from 'react-native';
 import shorthash from 'shorthash';
-import * as FileSystem from 'expo-file-system';
+// import * as FileSystem from 'expo-file-system';
 import FastImage from 'react-native-fast-image';
 
 export default class CacheImage extends React.Component {

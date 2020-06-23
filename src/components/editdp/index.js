@@ -8,7 +8,7 @@ import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons } from '@expo/v
 // import ImagePicker from 'react-native-image-picker'
 import ImagePicker from 'react-native-image-crop-picker';
 import styles from './style';
-import * as Permissions from 'expo-permissions';
+// import * as Permissions from 'expo-permissions';
 
 const EditDP = ({ route, navigation }) => {
     const [image_obj, setImage] = useState({})

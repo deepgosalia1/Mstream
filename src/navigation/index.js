@@ -13,21 +13,21 @@ import Appsettings from '../components/appsettings'
 import EditDP from '../components/editdp'
 import Playlist from '../components/library/Playlist';
 import Songs from '../components/library/Songs';
-import YourScreen from '../components/library/YourScreen';
-import UploadsList from '../components/library/YourScreen/uploads';
-import MeFollow from '../components/library/YourScreen/youarefollowing';
+// import YourScreen from '../components/library/YourScreen';
+// import UploadsList from '../components/library/YourScreen/uploads';
+// import MeFollow from '../components/library/YourScreen/youarefollowing';
 
-function youStack() {
-  const Stack = createStackNavigator();
+// function youStack() {
+//   const Stack = createStackNavigator();
 
-  return (
-    <Stack.Navigator screenOptions={{ headerStyle: { height: 45, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
-      <Stack.Screen options={{headerShown: false}} name="You" component={YourScreen} />
-      <Stack.Screen name="UploadsList" component={UploadsList} />
-      <Stack.Screen name="MeFollow" component={MeFollow} />
-    </ Stack.Navigator>
-  );
-}
+//   return (
+//     <Stack.Navigator screenOptions={{ headerStyle: { height: 45, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
+//       <Stack.Screen options={{headerShown: false}} name="You" component={YourScreen} />
+//       <Stack.Screen name="UploadsList" component={UploadsList} />
+//       <Stack.Screen name="MeFollow" component={MeFollow} />
+//     </ Stack.Navigator>
+//   );
+// }
 
 function libraryTabs() {
   const Tab = createMaterialTopTabNavigator();
@@ -41,11 +41,10 @@ function libraryTabs() {
       activeTintColor: 'white',
       inactiveTintColor: 'white',
     }}
-    initialRouteName='YouStack'
     >
       <Tab.Screen name="Playlists" component={Playlist} />
       <Tab.Screen name="Songs" component={Songs} />
-      <Tab.Screen name="YouStack" component={youStack} />
+      {/* <Tab.Screen name="YouStack" component={youStack} /> */}
 
     </Tab.Navigator>
   );
@@ -73,7 +72,7 @@ export default function MyTabs() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Library"
+      initialRouteName="Home"
       activeColor="blue"
       inactiveColor='grey'
       labelStyle={{ fontSize: 12 }}

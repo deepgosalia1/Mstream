@@ -27,6 +27,8 @@ import CImage from '../../customRootComponents/CImage'
 import auth, { firebase } from '@react-native-firebase/auth';
 import HCI from '../../customRootComponents/homeCardImage';
 import LinearGradient from 'react-native-linear-gradient';
+import SmartImage from '../../customRootComponents/smartImage';
+import FastImage from 'react-native-fast-image';
 
 
 
@@ -53,30 +55,30 @@ export default function Home() {
       {/* AppName and playbutton controls section {start} */}
 
       <View style={{ }}>
-        <View style={{ width: '70%', height: 45, position: 'absolute' }}>
+        <View style={{width:'100%', height: 45, alignSelf:'center', position:'absolute' }}>
           {/* <LinearGradient colors={['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF']}> */}
           <Text
-            h3
+            h4
             bold
-            color={'green'}
+            color={'#191919'}
             style={{
-              textAlign: 'right',
+              textAlign: 'center',
               textShadowColor: 'white',
-              textShadowOffset: { width: 1, height: -2 },
-              textShadowRadius: 1
+              textShadowOffset: { width: 0.5, height: -1 },
+              textShadowRadius: 20
             }}
           >
             M_Stream
       </Text>
       {/* </LinearGradient> */}
         </View>
-        <View style={{ width: '28%', height: 45, position: 'relative', alignSelf: 'flex-end' }}>
+        <View style={{ height: 45, alignSelf:'flex-end', marginRight:5 }}>
           <TouchableOpacity
             style={{ alignSelf: 'center' }}
           // onPress={() => setPlay(!isplaying)}
           >
             {/* {playButton} */}
-            <Feather name="bell" size={44} color="white" />
+            <Feather name="bell" size={40} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -100,10 +102,11 @@ export default function Home() {
             ({ item }) => (
               <Block card flex style={{ alignSelf: 'flex-end', width: '100%' }}>
                 {/* {setImage(prev => item.id)} */}
-                <CImage
-                  uri={item.image}
+                <SmartImage
+                  source={item.image}
                   style={{ height: 150, width: 350 }}
-                  defaultsource={'../../assets/images/musicicon'}
+                  priorityValue={FastImage.priority.high}
+                  cacheControl={FastImage.cacheControl.immutable}                  
                 />
               </Block>
             )
@@ -121,6 +124,7 @@ export default function Home() {
       </TouchableOpacity>
       <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
@@ -140,6 +144,7 @@ export default function Home() {
       </TouchableOpacity>
       <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
@@ -160,6 +165,7 @@ export default function Home() {
       </TouchableOpacity>
       <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
+          showsHorizontalScrollIndicator={false}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
@@ -181,6 +187,7 @@ export default function Home() {
       </TouchableOpacity>
       <FlatList
         style={{ marginTop: 15, }}
+        showsHorizontalScrollIndicator={false}
         data={themes.articles}
         keyExtractor={item => item.id}
         renderItem={
@@ -194,11 +201,13 @@ export default function Home() {
                 subtitleStyle={{ color: 'white' }}
                 subtitle={'Artist : ' + item.artist}
                 leftElement={
-                  <CImage
+                  <SmartImage
                     // isHome = {true}
                     style={{width:50, height:50, backgroundColor:'red', alignSelf:'center'}}
-                    uri = {item.image}
-                    defaultsource={require('../../assets/images/musicicon.png')}
+                    source = {item.image}
+                    priorityValue={FastImage.priority.normal}
+                    cacheControl={FastImage.cacheControl.immutable}
+                    // defaultsource={require('../../assets/images/musicicon.png')}
                   />
                 }
                 bottomDivider
@@ -225,6 +234,7 @@ export default function Home() {
       </TouchableOpacity>
       <FlatList
         style={{ marginTop: 15, marginBottom: 50, borderRadius: 25,}}
+        showsHorizontalScrollIndicator={false}
         data={themes.articles}
         keyExtractor={item => item.id}
         renderItem={
@@ -238,11 +248,13 @@ export default function Home() {
                 subtitleStyle={{ color: 'white' }}
                 subtitle={'Artist : ' + item.artist}
                 leftElement={
-                  <CImage
+                  <SmartImage
                     // isHome = {true}
                     style={{width:50, height:50, backgroundColor:'red', alignSelf:'center'}}
-                    uri = {item.image}
-                    defaultsource={require('../../assets/images/musicicon.png')}
+                    source = {item.image}
+                    priorityValue={FastImage.priority.normal}
+                    cacheControl={FastImage.cacheControl.immutable}
+                    // defaultsource={require('../../assets/images/musicicon.png')}
                   />
                 }
                 bottomDivider

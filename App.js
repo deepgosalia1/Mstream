@@ -12,14 +12,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginApp from './src/components/login';
 import SignUp from './src/components/signup';
 import { createStackNavigator } from '@react-navigation/stack';
-import Music from './src/components/newMusic'
-import MusicPlayer from './src/components/musicplayer'
-import TrackPlayer from 'react-native-track-player';
-import storage from '@react-native-firebase/storage';
-import YourScreen from './src/components/library/YourScreen';
-import HCI from './src/customRootComponents/homeCardImage'
-import Playlist_Section from './src/components/playlist_section';
-import Home from './src/components/home';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -35,11 +27,8 @@ export default function App() {
   console.disableYellowBox = true;
   // TrackPlayer.setupPlayer()
   return (
-    // <NavigationContainer independent={true}>
-    //   <Signupstack />
-    //   {/* <YourScreen/> */}
-    // </NavigationContainer>
-    // <HCI/>
-    <Home/>
+    <NavigationContainer independent={true}>
+      <Signupstack />
+    </NavigationContainer>
   );
 }
