@@ -25,6 +25,8 @@ import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons, SimpleLineIcon
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import CImage from '../../customRootComponents/CImage'
 import auth, { firebase } from '@react-native-firebase/auth';
+import HCI from '../../customRootComponents/homeCardImage';
+import LinearGradient from 'react-native-linear-gradient';
 
 
 
@@ -46,14 +48,13 @@ export default function Home() {
   }
   return (
 
-    <ScrollView style={{ flex: 1, backgroundColor: '#140341' }}>
-
-
-
+    <ScrollView style={{ flex: 1 }}>
+      <LinearGradient colors={['#9296f0', '#2227ab', '#9296f0']}>
       {/* AppName and playbutton controls section {start} */}
 
-      <View style={{ borderBottomWidth: 1, borderBottomColor: 'grey' }}>
-        <View style={{ backgroundColor: 'black', width: '70%', height: 45, position: 'absolute' }}>
+      <View style={{ }}>
+        <View style={{ width: '70%', height: 45, position: 'absolute' }}>
+          {/* <LinearGradient colors={['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF']}> */}
           <Text
             h3
             bold
@@ -67,8 +68,9 @@ export default function Home() {
           >
             M_Stream
       </Text>
+      {/* </LinearGradient> */}
         </View>
-        <View style={{ backgroundColor: 'black', width: '28%', height: 45, position: 'relative', alignSelf: 'flex-end' }}>
+        <View style={{ width: '28%', height: 45, position: 'relative', alignSelf: 'flex-end' }}>
           <TouchableOpacity
             style={{ alignSelf: 'center' }}
           // onPress={() => setPlay(!isplaying)}
@@ -102,11 +104,6 @@ export default function Home() {
                   uri={item.image}
                   style={{ height: 150, width: 350 }}
                   defaultsource={'../../assets/images/musicicon'}
-                  // source={{ uri: item.image }}
-                  // PlaceholderContent={<ActivityIndicator />}
-                  // borderRadius={5}
-                  // resizeMethod="resize"
-                  // resizeMode="cover"
                 />
               </Block>
             )
@@ -119,29 +116,17 @@ export default function Home() {
       {/* Banner Carousal end */}
 
       {/*Albums and their cards section (NEW RELEASES)*/}
-      <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center', justifyContent: 'space-between', marginTop: 15 }}>
-        <Text style={{ color: 'white', }} h5 bold > New Releases </Text>
-        <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-          <Ionicons name="ios-arrow-forward" size={24} color="green" />
-          <Ionicons name="ios-arrow-forward" size={24} color="yellow" />
-        </TouchableOpacity>
-      </View>
-      <View horizontal style={{ width: '100%', height: 150, marginTop: 10, marginLeft: 8 }}>
+      <TouchableOpacity>
+        <Text style={{borderBottomColor: 'white', marginTop: 20, color: 'white', marginLeft: 8, marginBottom: 5, fontSize:19}} bold >New Release</Text>
+      </TouchableOpacity>
+      <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
             ({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
-                <Card
-                  containerStyle={{ width: 100, height: 100, elevation: 15, marginRight: 5, marginTop: 0, marginLeft: 5, backgroundColor: 'black', borderRadius: 90 }}
-                  imageStyle={{ width: 100, height: 100, alignSelf: 'center', justifyContent: 'center', marginTop: -2 }}
-                  imageProps={{ resizeMode: 'cover', borderRadius: 90, PlaceholderContent: <ActivityIndicator /> }}
-                  image={{ uri: item.image }}
-                />
-                <Text style={{ color: 'white', textAlign: 'center', fontSize: 13, width: '100%', fontWeight: 'bold', marginTop: 8 }}>
-                  {item.title}
-                </Text>
+                <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
             )
           }
@@ -150,70 +135,42 @@ export default function Home() {
       {/*Albums and their cards section (NEW RELEASES)*/}
 
       {/*Albums and their cards section (GAHUDI RELEASES)*/}
-
-
-      <View style={{ flexDirection: 'row', width: '95%', alignSelf: 'center', justifyContent: 'space-between', }}>
-        <TouchableOpacity><Text style={{ borderBottomWidth: 1, borderBottomColor: 'white', marginTop: 5, color: 'white', marginLeft: 10, width: 75, marginBottom: 5 }} h5 bold >Gahudi</Text></TouchableOpacity>
-        <TouchableOpacity style={{ flexDirection: 'row', alignSelf: 'flex-end' }}>
-          <Ionicons name="ios-arrow-forward" size={24} color="green" />
-          <Ionicons name="ios-arrow-forward" size={24} color="yellow" />
-        </TouchableOpacity>
-      </View>
-      <View horizontal style={{ width: '100%', height: 120, marginTop: 5, marginLeft: 10 }}>
+      <TouchableOpacity>
+        <Text style={{borderBottomColor: 'white', marginTop: 5, color: 'white', marginLeft: 8, marginBottom: 5,}} h5 bold >Gahudi</Text>
+      </TouchableOpacity>
+      <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
             ({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
-                <Card
-                  containerStyle={{ width: 110, height: 90, elevation: 150, marginRight: 3, marginTop: 0, marginLeft: 5, borderColor: 'white', backgroundColor: 'black', borderRadius: 5 }}
-                  imageStyle={{ width: 110, alignSelf: 'center', justifyContent: 'center', borderColor: 'black', height: 88 }}
-                  imageProps={{ borderRadius: 5, PlaceholderContent: <ActivityIndicator /> }}
-                  image={{ uri: item.image }}
-                />
-                <Text bold style={{ color: 'white', textAlign: 'center', marginTop: 5, fontSize: 13, width: '100%' }}>
-                  {item.title}
-                </Text>
+                <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
             )
           }
         />
       </View>
-
-
       {/*Albums and their cards section (Gahudi RELEASES)*/}
 
 
       {/*Albums and their cards section (Kumani RELEASES)*/}
-
-
       <TouchableOpacity>
-        <Text style={{ borderBottomWidth: 1, borderBottomColor: 'white', marginTop: 5, color: 'white', marginLeft: 8, width: 105, marginBottom: 5 }} h4 bold >Kumani</Text>
+        <Text style={{borderBottomColor: 'white', marginTop: 5, color: 'white', marginLeft: 8, marginBottom: 5,}} h5 bold >Kumani</Text>
       </TouchableOpacity>
-      <View horizontal style={{ width: '100%', height: 150, marginTop: 5, borderColor: 'black', borderWidth: 1 }}>
+      <View horizontal style={{ width: '100%', height: 160, marginTop: 5,}}>
         <FlatList horizontal={true}
           data={themes.articles}
           keyExtractor={item => item.id}
           renderItem={
             ({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
-                <Card
-                  containerStyle={{ width: 150, height: 130, elevation: 150, marginRight: 3, marginTop: 0, marginLeft: 5, borderColor: 'white', backgroundColor: 'black', borderRadius: 5 }}
-                  imageStyle={{ width: 150, alignSelf: 'center', justifyContent: 'center', borderRadius: 200, borderColor: 'black', height: 105 }}
-                  imageProps={{ PlaceholderContent: <ActivityIndicator /> }}
-                  image={{ uri: item.image }}
-                >
-                  <Text bold style={{ backgroundColor: 'black', color: 'white', textAlign: 'center', marginTop: -7, fontSize: 12, width: '100%', fontWeight: '600' }}>
-                    {item.title}
-                  </Text>
-                </Card>
+                <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
             )
           }
         />
       </View>
-
       {/*Albums and their cards section (Kumani RELEASES)*/}
 
       {/*Only Gahudi Songs and their Flatlist*/}
@@ -228,18 +185,22 @@ export default function Home() {
         keyExtractor={item => item.id}
         renderItem={
           ({ item }) => (
-            <TouchableOpacity style={{ width: '95%', alignSelf: 'center', marginBottom: 3 }}>
+            <TouchableOpacity style={{ width: '95%', alignSelf: 'center', marginBottom: 3, }}>
+              <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#ccccbb', '#91916e']} style={{ borderRadius: 10}}>
               <ListItem
-                containerStyle={{ borderWidth: 1, borderColor: 'grey', height: 70, borderRadius: 25, backgroundColor: '#' }}
+                containerStyle={{ borderWidth: 1, borderColor: 'grey', height: 70, borderRadius: 10, backgroundColor: '#' }}
                 title={item.title}
                 titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
                 subtitleStyle={{ color: 'white' }}
                 subtitle={'Artist : ' + item.artist}
-                leftAvatar={{
-                  rounded: false,
-                  source: { uri: item.image }
-
-                }}
+                leftElement={
+                  <CImage
+                    // isHome = {true}
+                    style={{width:50, height:50, backgroundColor:'red', alignSelf:'center'}}
+                    uri = {item.image}
+                    defaultsource={require('../../assets/images/musicicon.png')}
+                  />
+                }
                 bottomDivider
                 topDivider
                 rightElement={
@@ -249,13 +210,10 @@ export default function Home() {
                 }
 
               />
+              </LinearGradient>
             </TouchableOpacity>
           )
-        }
-
-      />
-
-
+        }/>
       {/*Only Gahudi Songs and their Flatlist*/}
 
 
@@ -266,23 +224,27 @@ export default function Home() {
         </Text>
       </TouchableOpacity>
       <FlatList
-        style={{ marginTop: 15, marginBottom: 50, }}
+        style={{ marginTop: 15, marginBottom: 50, borderRadius: 25,}}
         data={themes.articles}
         keyExtractor={item => item.id}
         renderItem={
           ({ item }) => (
-            <TouchableOpacity style={{ width: '95%', alignSelf: 'center', marginBottom: 3 }}>
+            <TouchableOpacity style={{ width: '95%', alignSelf: 'center', marginBottom: 3, }}>
+              <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#192f6a', '#3b963b']} style={{ borderRadius: 10}}>
               <ListItem
-                containerStyle={{ borderWidth: 1, borderColor: 'grey', height: 70, borderRadius: 25, backgroundColor: '#' }}
+                containerStyle={{ borderWidth: 1, borderColor: 'grey', height: 70, borderRadius: 10, backgroundColor: '#' }}
                 title={item.title}
                 titleStyle={{ color: 'white', fontWeight: 'bold', fontSize: 20 }}
                 subtitleStyle={{ color: 'white' }}
                 subtitle={'Artist : ' + item.artist}
-                leftAvatar={{
-                  rounded: false,
-                  source: { uri: item.image }
-
-                }}
+                leftElement={
+                  <CImage
+                    // isHome = {true}
+                    style={{width:50, height:50, backgroundColor:'red', alignSelf:'center'}}
+                    uri = {item.image}
+                    defaultsource={require('../../assets/images/musicicon.png')}
+                  />
+                }
                 bottomDivider
                 topDivider
                 rightElement={
@@ -292,14 +254,12 @@ export default function Home() {
                 }
 
               />
+              </LinearGradient>
             </TouchableOpacity>
           )
-        }
-
-      />
-
+        }/>
       {/*Only Kumani Songs and their Flatlist*/}
-
+      </LinearGradient>
 
     </ScrollView>
 

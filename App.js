@@ -19,6 +19,7 @@ import storage from '@react-native-firebase/storage';
 import YourScreen from './src/components/library/YourScreen';
 import HCI from './src/customRootComponents/homeCardImage'
 import Playlist_Section from './src/components/playlist_section';
+import Home from './src/components/home';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -38,6 +39,7 @@ export default function App() {
     //   <Signupstack />
     //   {/* <YourScreen/> */}
     // </NavigationContainer>
-    <HCI/>
+    // <HCI/>
+    <Home/>
   );
 }

@@ -7,7 +7,7 @@ import FastImage from 'react-native-fast-image';
 export default class CacheImage extends React.Component {
   state = {
     isLoading: true,
-    source: null,
+    source: require('../../assets/images/musicicon.png'),
   };
 
   componentDidMount = async () => {
@@ -35,12 +35,12 @@ export default class CacheImage extends React.Component {
     });
   };
 
-  onLoad = () => {
-    console.log('onload complete')
-    this.setState({isLoading: false});
-  };
+  // onLoad = () => {
+  //   console.log('onload complete')
+  //   this.setState({isLoading: false});
+  // };
   render() {
-    return <Image style={this.props.style} source={this.state.source} defaultSource={this.props.defaultSource}/>;
+    return <Image style={this.props.style} source={this.state.source} defaultSource={require('../../assets/images/musicicon.png')}/>;
     // return (
     //   <View>
     //     {this.state.isLoading && <ActivityIndicator size={'large'} />}
