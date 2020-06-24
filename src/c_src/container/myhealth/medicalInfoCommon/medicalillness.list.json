@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Dieabetc",
+        "date":"Diagnosed on 01 June 2003",
+        "showActive":true,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":0
+        
+    },
+    {
+        "title": "Arteriosclerosis",
+        "date":"Diagnosed on 01 June 2003",
+        "showActive":true,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":1
+        
+    },
+    {
+        "title": "Hypertension",
+        "date":"Diagnosed on 01 June 2003",
+        "showActive":false,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":2
+        
+    },
+    {
+        "title": "Nephertisis",
+        "date":"Diagnosed on 01 June 2003",
+        "showActive":true,
+        "showIcon": "SELECT_ICON",
+        "showDelete": "DELETE_ICON",
+        "id":3
+        
+    }
+]

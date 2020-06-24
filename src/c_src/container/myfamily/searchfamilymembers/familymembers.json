@@ -1,0 +1,26 @@
+[
+    {
+        "key": 1,
+        "name": "Dr. Anastasia A. Allood",
+        "relation": "Father",
+        "address": "Borivali, Mumbai",
+        "lat": 19.0,
+        "lng": 72.0
+    },
+    {
+        "key": 2,
+        "name": "Dr. Maria R. Owens",
+        "relation": "Mother",
+        "address": "Malabar Hill, Mumbai",
+        "lat": 19.0,
+        "lng": 72.0
+    },
+    {
+        "key": 3,
+        "name": "Dr. Paul K. Sabatini",
+        "relation": "Brother",
+        "address": "Dadar, Mumbai",
+        "lat": 19.0,
+        "lng": 72.0
+    }
+]

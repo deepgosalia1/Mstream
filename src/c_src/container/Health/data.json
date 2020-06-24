@@ -1,0 +1,56 @@
+[
+  {
+    "key": "1",
+    "name": "Acebutolol",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"200mg"
+
+  },
+  {
+    "key": "2",
+    "name": "Medicine2",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"290mg"
+
+  },
+  {
+    "key": "3",
+    "name": "Medicine3",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"250mg"
+
+  },
+  {
+    "key": "4",
+    "name": "Medicine4",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"100mg"
+ 
+  },
+  {
+    "key": "5",
+    "name": "Medicine5",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"300mg"
+
+  },
+  {
+    "key": "6",
+    "name": "Medicine6",
+    "type":"Oral Capsule",
+    "time":"Twice a day after food",
+    "duration":"13 April - 20 April, 2018",
+    "amount":"240mg"
+  
+  }
+]

@@ -1,0 +1,16 @@
+export const USER_SIGNED_IN = "USER_SIGNED_IN";
+export const SESSION_COOKIE = "SESSION_COOKIE";
+export const EMP_REQUEST_TYPE_DATA = "EMP_REQUEST_TYPE_DATA";
+export const USER_LOGGED_IN_RESPONSE = "USER_LOGGED_IN_RESPONSE";
+export const USER_ROLE = "USER_ROLE";
+export const DEVICE_TOKEN = "DEVICE_TOKEN";
+export const LAST_SYNC_TIME = "LAST_SYNC_TIME";
+export const LAST_CHECK_IN_TIME = "LAST_CHECK_IN_TIME";
+export const SYSTEM_PARAMETERS = "SYSTEM_PARAMETERS";
+export const SYSTEM_PARAMETERS_DATE_FORMAT = "YYYY-MM-DDTHH:mm:ssZ";
+export const USER_DATE_FORMAT = "DD-MM-YYYY HH:mm:ss";
+export const ENTITY_MASTER_DATA = "entityMasterData";
+export const IS_CHECKED_IN = "IS_CHECKED_IN";
+export const BUSINESS_TIME_START = 7;
+export const BUSINESS_TIME_END = 19;
+export const HAS_INTERNET = "HAS_INTERNET";

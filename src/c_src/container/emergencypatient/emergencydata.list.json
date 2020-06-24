@@ -1,0 +1,37 @@
+[
+    {
+        "firstName": "Police",
+        "lastName": "",
+        "relation": "",
+        "contact": "100",
+        "favourite": false
+    },
+    {
+        "firstName": "Ambulance",
+        "lastName": "",
+        "relation": "",
+        "contact": "108",
+        "favourite": true
+    },
+    {
+        "firstName": "Home",
+        "lastName": "",
+        "relation": "",
+        "contact": "505-682-7957",
+        "favourite": false
+    },
+    {
+        "firstName": "John",
+        "lastName": "George",
+        "relation": "Father",
+        "contact": "508-682-7957",
+        "favourite": false
+    },
+    {
+        "firstName": "Annie",
+        "lastName": "John",
+        "relation": "Mother",
+        "contact": "508-682-7957",
+        "favourite": false
+    }
+]
