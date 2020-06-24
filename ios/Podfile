@@ -1,5 +1,6 @@
 platform :ios, '13.1'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
 
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
@@ -82,6 +83,8 @@ target 'Mstream' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  
+  pod 'react-native-track-player', :path => '../node_modules/react-native-track-player'
 
   target 'MstreamTests' do
     inherit! :complete
@@ -89,6 +92,7 @@ target 'Mstream' do
   end
 
   use_native_modules!
+  use_unimodules!
 
   # Enables Flipper.
   #

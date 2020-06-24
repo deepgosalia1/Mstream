@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginApp from './src/components/login';
 import SignUp from './src/components/signup';
 import { createStackNavigator } from '@react-navigation/stack';
+import MusicPlayer from './src/components/musicplayer';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -27,8 +28,9 @@ export default function App() {
   console.disableYellowBox = true;
   // TrackPlayer.setupPlayer()
   return (
-    <NavigationContainer independent={true}>
-      <Signupstack />
-    </NavigationContainer>
+    // <NavigationContainer independent={true}>
+    //   <Signupstack />
+    // </NavigationContainer>
+    <MusicPlayer/>
   );
 }

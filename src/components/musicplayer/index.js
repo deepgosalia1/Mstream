@@ -76,7 +76,7 @@ export default class MusicPlayer extends ProgressComponent {
                     {/* playlist name and album name */}
                     <View style={{ alignItems: 'center', marginTop: -25 }}>
                         <Text style={{ color: '#FFFFFF', fontSize: 10 }}>PLAYLIST</Text>
-                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: '500' }}>Album_name_here</Text>
+                        <Text style={{ color: '#FFFFFF',  fontWeight: '500' }}>Album_name_here</Text>
                     </View>
 
                     {/* song image/ thumbnail zone */}
@@ -86,8 +86,8 @@ export default class MusicPlayer extends ProgressComponent {
 
                     {/* song name and artist name */}
                     <View style={{ marginTop: 25, flexDirection: 'column', alignItems: 'center' }}>
-                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: 'bold', fontSize: 20 }}>Song_Name_here</Text>
-                        <Text style={{ color: '#FFFFFF', fontFamily: 'sans-serif', fontWeight: '500', marginTop: 3 }}>artist_name_here</Text>
+                        <Text style={{ color: '#FFFFFF',  fontWeight: 'bold', fontSize: 20 }}>Song_Name_here</Text>
+                        <Text style={{ color: '#FFFFFF',  fontWeight: '500', marginTop: 3 }}>artist_name_here</Text>
                     </View>
 
                     {/* slider component only */}
@@ -96,7 +96,8 @@ export default class MusicPlayer extends ProgressComponent {
                             minimumValue={0}
                             value={this.state.position}
                             animationType="timing"
-                            maximumValue={this.state.trackLength}
+                            //maximumValue={this.state.trackLength}
+                            maximumValue={300}
                             trackStyle={{ width: Dimensions.get('screen').width - 50, height: 4 }}
                             thumbStyle={{ height: 20, width: 20, backgroundColor: '#fff' }}
                             thumbTouchSize={{ width: 100, height: 40 }}

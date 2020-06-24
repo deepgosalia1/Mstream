@@ -17,7 +17,7 @@ module.exports = async function () {
         if (time <= 3) {
             TrackPlayer.skipToPrevious()
         } else {
-            TrackPlayer.seekTo(0)
+            // TrackPlayer.seekTo(0)
         }
     })
 
