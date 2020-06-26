@@ -1,7 +1,5 @@
 /**
  *  eslint-disable
- * Sample React Native App
- * https://github.com/facebook/react-native
  *
  * @format
  * @flow strict-local
@@ -13,6 +11,7 @@ import LoginApp from './src/components/login';
 import SignUp from './src/components/signup';
 import { createStackNavigator } from '@react-navigation/stack';
 import MusicPlayer from './src/components/musicplayer';
+import TrackPlayer, {Capability} from 'react-native-track-player';
 
 const Signupstack = () => {
   const Stack = createStackNavigator();
@@ -26,7 +25,8 @@ const Signupstack = () => {
 
 export default function App() {
   console.disableYellowBox = true;
-  // TrackPlayer.setupPlayer()
+  TrackPlayer.setupPlayer()
+  // trackNotification();
   return (
     // <NavigationContainer independent={true}>
     //   <Signupstack />
