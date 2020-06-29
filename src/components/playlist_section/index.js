@@ -1,35 +1,44 @@
+// React Imports
 import React, { useState, useEffect } from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
-  ScrollView,
+  Image,
   View,
   Text,
   TouchableOpacity,
-  Touchable,
-  StatusBar,
   Alert,
+  FlatList,
   Button
 } from 'react-native';
-import { Icon } from 'react-native-vector-icons';
-import { FlatList } from 'react-native-gesture-handler';
-import { TextInput } from 'react-native-paper';
-import { NavigationContainer } from '@react-navigation/native'
+import {ListItem} from 'react-native-elements';
+import { Surface } from 'react-native-paper';
+import LinearGradient from 'react-native-linear-gradient';
 
+// Firebase Imports
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
-import { getTokenSourceMapRange } from 'typescript';
+import { element } from 'prop-types';
 
-export default function PlaylistSection({route,navigation}) {
-  const {item} = route.params;
+//url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
+
+export default function PlaylistSection({ route, navigation }) {
+  const { item } = route.params;
   const user = auth().currentUser;
   const [input, setinput] = useState('');
   const [list, displayList] = useState([]);
   // const [datainputList, setData] = useState([])
+  var arr = Object.keys(item.songs)
+  console.log("arr is ", arr)
+  const inputHandler = (enteredText) => { setinput(enteredText); }
 
-  const refreshList = () => {
-
-    setTimeout(()=>{
+  const inputSetter = () => {
+    database()
+      .ref('/playlist/' + user.uid + '/' + input)
+      .update({
+        name: input,
+        songlist: ''
+      });
+    setTimeout(() => {
       database().ref('/playlist/' + user.uid)
         .once('value', function (snapshot) {
           displayList([])
@@ -40,54 +49,24 @@ export default function PlaylistSection({route,navigation}) {
           })
           displayList(dataArray);
         })
-      }, 50
+    }, 50
     )
   }
 
-  const inputHandler = (enteredText) => {
-    setinput(enteredText);
-  }
-
-
-  const inputSetter = () => {
-    database()
-      .ref('/playlist/' + user.uid + '/' + input)
-      .update({
-        name: input,
-        songlist: ''
-      });
-      setTimeout(()=>{
-        database().ref('/playlist/' + user.uid)
-          .once('value', function (snapshot) {
-            displayList([])
-            var dataArray = []
-            snapshot.forEach(element => {
-              console.log(element.val("name"))
-              dataArray.push(element.val())
-            })
-            displayList(dataArray);
-          })
-        }, 50
-      )
-    // refreshList;
-
-
-  }
-
-  const onDelete = (node) =>{
-    console.log("ye delete hoga",node.name)
+  const onDelete = (node) => {
+    console.log("ye delete hoga", node.name)
     Alert.alert(
       'Delete ?',
       node.name,
       [
         {
           text: 'Delete',
-          onPress: () => {database()
-                          .ref('/playlist/' + user.uid + '/' + node.name)
-                          .remove()
-                        
-                        refreshList;
-                        }
+          onPress: () => {
+            database()
+              .ref('/playlist/' + user.uid + '/' + node.name)
+              .remove()
+            refreshList;
+          }
         },
         {
           text: 'Cancel',
@@ -97,74 +76,70 @@ export default function PlaylistSection({route,navigation}) {
       ],
       { cancelable: false }
     );
-    
-
   }
 
-  const goTo = () => {
-    console.log("Does nothing");
-  }
+  const goTo = () => { console.log("Does nothing"); }
 
   return (
-    <NavigationContainer independent={true}>
     <View style={{ flex: 1, backgroundColor: '#140341' }}>
-      <View>
+      <LinearGradient colors={['#666666','#4d4d4d','#333333','#1a1a1a','#000000']}
+        location={[0.2, 0.8, 1]}
+        style={styles.linearGradient}>
+      <Surface raised style={{ marginTop: 30, height: 180, width: 200, alignSelf: 'center', elevation: 50, borderRadius: 30 }}>
+        <Image source={{ uri: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' } || require('../../assets/images/temp.jpeg')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
+      </Surface>
 
-        <Text style={styles.playlistHeader} >
-          Your Songs Here !</Text>
-
-        {/* <TextInput
-          placeholder="Playlist Title"
-          onChangeText={inputHandler}
-          value={input} /> */}
-{/* 
-        <Button
-          title="Create"
-          onPress={inputSetter} /> */}
+      <View style={{ marginTop: 25, flexDirection: 'column', alignItems: 'center' }}>
+        <Text style={styles.playlistHeader}>{item.name}</Text>
+        <Text style={styles.playlistSubHeader}>By {item.name}</Text>
       </View>
-
-      <View style={{marginBottom:150}}>
-        <Button title="refresh"
-        onPress={inputSetter} />
+      <View style={{}}>
+        <Button title="Play" />
         <FlatList
-            data = {list}
-            renderItem={({item})=>(<TouchableOpacity onLongPress={onDelete.bind(this,item)}
-                                                      onPress={navigation.navigate(goTo.bind(this,item))}
-                                                      >
-                                      <View>
-                                        <Text style={styles.listdisplay }>{item.songlist}</Text>
-                                      </View>
-                                  </TouchableOpacity>
-                              )}
-          />
-
+          style={styles.listdisplay}
+          data={arr}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onLongPress={onDelete.bind(this, item)}
+              onPress={() => { navigation.navigate('Music', { url: url }) }}
+            >
+              <Text style={styles.textdisplay}>{item}</Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
-
+      </LinearGradient>
     </View>
-    </NavigationContainer>
   );
 }
+
 styles = StyleSheet.create({
 
-  playlistHeader:{
-    fontSize: 30,
-    color: 'white',
-    width: 300,
-    padding: 10,
+  listdisplay: {
+    textAlign:'center', 
+    fontSize: 25,
+    color:'white',   
+  },
+  playlistHeader: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
+  playlistSubHeader: {
+    fontWeight: '500', 
+    marginTop: 3,
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    fontSize: 20,
   },
   container: {
     justifyContent: "center",
     alignItems: "center",
   },
-  listdisplay:{
-    fontSize: 30,
-    color: 'white',
-    width: 300,
-    padding:10,
-  },
   textdisplay: {
+    color:'white',
     textAlign: "center",
-    fontSize: 50,
+    fontSize: 25,
   },
   playlist: {
     fontSize: 80,

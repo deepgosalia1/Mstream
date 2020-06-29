@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import * as React from 'react';
+import {Button} from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons, Entypo, Feather } from '@expo/vector-icons'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -12,10 +13,9 @@ import Search from '../components/search';
 import Appsettings from '../components/appsettings'
 import EditDP from '../components/editdp'
 import Playlist from '../components/library/Playlist';
+import PlaylistSection from '../components/playlist_section';
 import Songs from '../components/library/Songs';
-// import YourScreen from '../components/library/YourScreen';
-// import UploadsList from '../components/library/YourScreen/uploads';
-// import MeFollow from '../components/library/YourScreen/youarefollowing';
+import MusicPlayer from '../components/musicplayer';
 
 // function youStack() {
 //   const Stack = createStackNavigator();
@@ -28,34 +28,51 @@ import Songs from '../components/library/Songs';
 //     </ Stack.Navigator>
 //   );
 // }
-
+function playlistStack() {
+  const Stack = createStackNavigator();
+  //  const {item} = para
+  return (
+    <Stack.Navigator >
+      <Stack.Screen name='Playlist' component={Playlist}
+        options={{ title: 'Playlist' }} />
+      <Stack.Screen name='PlaylistSection' component={PlaylistSection}
+        options={{
+          headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#fff" />)
+        }} />
+      <Stack.Screen name='Music' component={MusicPlayer} />
+    </Stack.Navigator>
+  )
+}
 function libraryTabs() {
   const Tab = createMaterialTopTabNavigator();
 
   return (
 
-    <Tab.Navigator style={{ paddingTop:35,flex: 1, backgroundColor: '#140341' }}
-    tabBarOptions={{
-      labelStyle: {fontSize:18},
-      style: { backgroundColor: '#140341' },
-      activeTintColor: 'white',
-      inactiveTintColor: 'white',
-    }}
+    <Tab.Navigator style={{ flex: 1, backgroundColor: '#140341' }}
+      tabBarOptions={{
+        labelStyle: { fontSize: 18 },
+        style: { backgroundColor: '#140341' },
+        activeTintColor: 'white',
+        inactiveTintColor: 'white',
+      }}
     >
-      <Tab.Screen name="Playlists" component={Playlist} />
+      <Tab.Screen name="Playlists" component={playlistStack} />
       <Tab.Screen name="Songs" component={Songs} />
       {/* <Tab.Screen name="YouStack" component={youStack} /> */}
 
     </Tab.Navigator>
   );
 }
- 
 
 function profileStack() {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator screenOptions={{ headerStyle: { height: 45, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
+    <Stack.Navigator screenOptions={{ headerStyle: { height: 0, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="MyAccount" component={DPS} />
       <Stack.Screen name="Appsettings" component={Appsettings} />
@@ -84,7 +101,7 @@ export default function MyTabs() {
         component={Home}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color }) => (  <Entypo name="home" color={color} size={26} />),
+          tabBarIcon: ({ color }) => (<Entypo name="home" color={color} size={26} />),
         }}
       />
 

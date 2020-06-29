@@ -28,9 +28,9 @@ export default function App() {
   console.disableYellowBox = true;
   // TrackPlayer.setupPlayer()
   return (
-    // <NavigationContainer independent={true}>
-    //   <Signupstack />
-    // </NavigationContainer>
-    <MusicPlayer/>
+    <NavigationContainer independent={true}>
+      <Signupstack />
+    </NavigationContainer>
+    // <MusicPlayer/>
   );
 }
