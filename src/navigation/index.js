@@ -16,6 +16,7 @@ import Playlist from '../components/library/Playlist';
 import PlaylistSection from '../components/playlist_section';
 import Songs from '../components/library/Songs';
 import MusicPlayer from '../components/musicplayer';
+import { Text } from 'galio-framework';
 
 // function youStack() {
 //   const Stack = createStackNavigator();
@@ -28,25 +29,7 @@ import MusicPlayer from '../components/musicplayer';
 //     </ Stack.Navigator>
 //   );
 // }
-function playlistStack() {
-  const Stack = createStackNavigator();
-  //  const {item} = para
-  return (
-    <Stack.Navigator >
-      <Stack.Screen name='Playlist' component={Playlist}
-        options={{ title: 'Playlist' }} />
-      <Stack.Screen name='PlaylistSection' component={PlaylistSection}
-        options={{
-          headerRight: () => (
-            <Button
-              onPress={() => alert('This is a button!')}
-              title="Info"
-              color="#fff" />)
-        }} />
-      <Stack.Screen name='Music' component={MusicPlayer} />
-    </Stack.Navigator>
-  )
-}
+
 function libraryTabs() {
   const Tab = createMaterialTopTabNavigator();
 
@@ -60,19 +43,40 @@ function libraryTabs() {
         inactiveTintColor: 'white',
       }}
     >
-      <Tab.Screen name="Playlists" component={playlistStack} />
+      <Tab.Screen name="Playlist" component={Playlist} />
       <Tab.Screen name="Songs" component={Songs} />
-      {/* <Tab.Screen name="YouStack" component={youStack} /> */}
 
     </Tab.Navigator>
   );
 }
 
+function libraryStack() {
+
+  
+  const Stack = createStackNavigator();
+  return (
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name = "LibraryTabs" component={libraryTabs}/>
+      <Stack.Screen name = "PlaylistSection" component={PlaylistSection}
+      options={{
+        headerRight: () => (
+          <Button
+            onPress={() => alert('This is a button!')}
+            title="Info"
+            color="#fff" />)
+      }} />
+      <Stack.Screen name='Music' component={MusicPlayer} />
+    </Stack.Navigator>
+  )
+}
+
+
+
 function profileStack() {
   const Stack = createStackNavigator();
 
   return (
-    <Stack.Navigator screenOptions={{ headerStyle: { height: 0, backgroundColor: 'lightblue', elevation: 0 }, headerTitleAlign: 'center', headerTransparent: true }} >
+    <Stack.Navigator screenOptions={{headerStyle:{height:40}, headerTitleAlign: 'center', headerTransparent: true }} >
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="MyAccount" component={DPS} />
       <Stack.Screen name="Appsettings" component={Appsettings} />
@@ -117,7 +121,7 @@ export default function MyTabs() {
 
       <Tab.Screen
         name="Library"
-        component={libraryTabs}
+        component={libraryStack}
         options={{
           tabBarLabel: 'My Music',
           tabBarIcon: ({ color }) => (

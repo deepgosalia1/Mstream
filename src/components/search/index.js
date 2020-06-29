@@ -27,8 +27,8 @@ export default function Search() {
     <View>
       <SafeAreaView>
         <ScrollView>
-          <LinearGradient colors={['#0039e6','#0033cc','#002db3','#002699','#002080','#001a66','#00134d']}
-            locations={[0.1,0.3,0.4,0.6,0.7,0.8,1]}
+          <LinearGradient colors={['#0039e6','#0033cc','#002db3','#002699','#002080','#001a66','#00134d'].reverse()}
+            locations={[0.2,0.4,0.6,0.7,0.8,0.95,1]}
             style={styles.linearGradient}>
             <Text style={styles.searchHeader} > Search </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
@@ -117,6 +117,7 @@ const styles = StyleSheet.create(
       borderBottomEndRadius: 10,
       justifyContent: 'flex-start',
       height: 100,
+      borderRadius:10,  
     },
     itemName: {
       marginTop: 10,

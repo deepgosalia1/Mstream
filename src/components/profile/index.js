@@ -49,7 +49,7 @@ export default function Profile({ navigation }) {
         </View>
       </Modal>
 
-      <Surface style={{ flex: 1, backgroundColor: 'lightblue', marginTop: 45 }}>
+      <Surface style={{ flex: 1, backgroundColor: 'lightblue'}}>
 
         <Surface style={{ width: '90%', height: '25%', backgroundColor: 'grey', justifyContent: 'flex-start', alignSelf: 'center', marginTop: 10 }}>
           <Text style={{ color: 'white', textAlignVertical: 'center', height: '100%', width: '100%', textAlign: 'center' }}> Space for ADS</Text>

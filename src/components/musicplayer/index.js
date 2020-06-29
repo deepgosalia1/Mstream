@@ -39,6 +39,7 @@ export default function MusicPlayer() {
   }, []);
 
   const setup = async () => {
+    await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getMetadata().then(res=>console.log(res.fullPath + 'yooo'))
     await TrackPlayer.setupPlayer()
       .then(async () => {
         await TrackPlayer.add({

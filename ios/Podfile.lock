@@ -385,7 +385,7 @@ PODS:
     - React
   - react-native-safe-area-context (1.0.2):
     - React
-  - react-native-track-player (1.2.3):
+  - react-native-track-player (2.0.0-rc12):
     - React
   - react-native-video (4.4.5):
     - React
@@ -867,7 +867,7 @@ SPEC CHECKSUMS:
   react-native-image-picker: 668e72d0277dc8c12ae90e835507c1eddd2e4f85
   react-native-netinfo: 9b9929fcfa4aabe92f49a9fb3f25394cc8721e87
   react-native-safe-area-context: 5292aacb304803e215ff13fd7f01c3577909319f
-  react-native-track-player: 84552605df7d90e199ff8b5deceddff58d658523
+  react-native-track-player: 90ea1f82e00266ef6e37635daf4451f7490ed3e3
   react-native-video: aa527b0acb37f94c4491e70df0274cb26979405d
   react-native-webview: 0e2881d2e3e72ad52a82445c1a116c43205fd471
   React-RCTActionSheet: f41ea8a811aac770e0cc6e0ad6b270c644ea8b7c

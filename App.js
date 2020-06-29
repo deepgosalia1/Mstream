@@ -30,7 +30,8 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Signupstack />
+      {/* <MusicPlayer/> */}
+
     </NavigationContainer>
-    // <MusicPlayer/>
   );
 }
