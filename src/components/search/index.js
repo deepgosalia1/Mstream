@@ -117,6 +117,7 @@ const styles = StyleSheet.create(
       borderBottomEndRadius: 10,
       justifyContent: 'flex-start',
       height: 100,
+      borderRadius:10,  
     },
     itemName: {
       marginTop: 10,

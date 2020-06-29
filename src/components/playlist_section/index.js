@@ -22,6 +22,8 @@ import { element } from 'prop-types';
 //url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
 
 export default function PlaylistSection({ route, navigation }) {
+  // return(<View style={{backgroundColor:'red', flex:1}}/>)
+// }
   const { item } = route.params;
   const user = auth().currentUser;
   const [input, setinput] = useState('');

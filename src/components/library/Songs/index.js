@@ -16,17 +16,16 @@ import LinearGradient from 'react-native-linear-gradient';
 export default function Songs() {
     return (
       <View style={{ flex:1, justifyContent: 'center', alignItems: 'center' }}>
-         <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
+         {/* <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
                     location={[0.2,0.8,1]}
                     style={styles.linearGradient}>
 
-                    </LinearGradient>
+                    </LinearGradient> */}
       </View>
     );
   }
 
   const styles = StyleSheet.create({
-
     container: {
       justifyContent: "center",
       alignItems: "center",
