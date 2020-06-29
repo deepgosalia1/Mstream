@@ -90,7 +90,7 @@ export default function Playlist({ navigation }) {
     <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a'].reverse()}
       location={[0.2, 0.8, 1]}
       style={styles.linearGradient}>
-      <View>
+      <View >
         <Text style={styles.playlistHeader} > Playlists </Text>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
           <TextInput

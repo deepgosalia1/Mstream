@@ -29,8 +29,9 @@ export default function PlaylistSection({ route, navigation }) {
   const [input, setinput] = useState('');
   const [list, displayList] = useState([]);
   // const [datainputList, setData] = useState([])
-  var arr = Object.keys(item.songs)
-  console.log("arr is ", arr)
+  var arr = Object.values(item.songs)
+  var tempe = Object.keys(item.songs)
+
   const inputHandler = (enteredText) => { setinput(enteredText); }
 
   const inputSetter = () => {
@@ -80,7 +81,16 @@ export default function PlaylistSection({ route, navigation }) {
     );
   }
 
-  const goTo = () => { console.log("Does nothing"); }
+  const getSong = (sitem,sindex) => { 
+    console.log("gets song link"); 
+    console.log(tempe[sindex])
+    database().ref('/songs/' +tempe[sindex] )
+        .once('value', function (snapshot) {
+          console.log(snapshot)
+          var data1 = snapshot
+        });
+    navigation.navigate('Music', {snapshot}); 
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#140341' }}>
@@ -100,10 +110,10 @@ export default function PlaylistSection({ route, navigation }) {
         <FlatList
           style={styles.listdisplay}
           data={arr}
-          renderItem={({ item }) => (
+          renderItem={({ item,index }) => (
             <TouchableOpacity
               onLongPress={onDelete.bind(this, item)}
-              onPress={() => { navigation.navigate('Music', { url: url }) }}
+              onPress={getSong.bind(this,item,index)}
             >
               <View style={styles.listItems}>
                <Image source={ require('../../assets/images/playlist.png')} style={styles.imageDisplay} />
