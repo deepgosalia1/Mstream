@@ -53,10 +53,12 @@ export default function SignUp({ navigation }) {
         database()
         .ref('/users/'+user.uid)
         .set({
-          name: user.email,
+          name: user.displayName,
           dob: '',
           phone: 0,
           email: user.email,
+          bs64:'',
+          bs64_hash:'',
         })
         .then(() => {
           database()

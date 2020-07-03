@@ -9,11 +9,11 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {FontAwesome} from '@expo/vector-icons';
-import {Text, Block} from 'galio-framework';
+import { FontAwesome } from '@expo/vector-icons';
+import { Text, Block } from 'galio-framework';
 import * as themes from '../../constants';
-import {useState} from 'react';
-import {ListItem} from 'react-native-elements';
+import { useState } from 'react';
+import { ListItem } from 'react-native-elements';
 import {
   Feather,
   Entypo,
@@ -40,7 +40,7 @@ export default function Home() {
     playButton = <FontAwesome name="play-circle" size={48} color="white" />;
   }
   return (
-    <ScrollView style={{flex: 1}}>
+    <ScrollView style={{ flex: 1 }}>
       <LinearGradient colors={['#9296f0', '#2227ab', '#9296f0']}>
         {/* AppName and playbutton controls section {start} */}
 
@@ -60,17 +60,17 @@ export default function Home() {
               style={{
                 textAlign: 'center',
                 textShadowColor: 'white',
-                textShadowOffset: {width: 0.5, height: -1},
+                textShadowOffset: { width: 0.5, height: -1 },
                 textShadowRadius: 20,
               }}>
               M_Stream
             </Text>
             {/* </LinearGradient> */}
           </View>
-          <View style={{height: 45, alignSelf: 'flex-end', marginRight: 5}}>
+          <View style={{ height: 45, alignSelf: 'flex-end', marginRight: 5 }}>
             <TouchableOpacity
-              style={{alignSelf: 'center'}}
-              // onPress={() => setPlay(!isplaying)}
+              style={{ alignSelf: 'center' }}
+            // onPress={() => setPlay(!isplaying)}
             >
               {/* {playButton} */}
               <Feather name="bell" size={40} color="white" />
@@ -84,13 +84,16 @@ export default function Home() {
 
         <View
           style={{
-            height: 152,
-            width: '85%',
+            height: 150,
+            width: '95%',
             alignSelf: 'center',
             marginTop: 10,
+            // backgroundColor: 'red',
+            alignItems: 'center',
+            // alignItems: 'center'
           }}>
           <Carousel
-            style={{}}
+            // style={{ width: '100%', alignSelf: 'flex-end', alignItems: 'flex-end' }}
             autoplayInterval={2500}
             loopClonesPerSide={2}
             loop={false}
@@ -98,12 +101,12 @@ export default function Home() {
             lockScrollWhileSnapping={true}
             autoplay={false}
             data={themes.articles}
-            renderItem={({item}) => (
-              <Block card flex style={{alignSelf: 'flex-end', width: '100%'}}>
+            renderItem={({ item }) => (
+              <Block card flex style={{ width: '100%', height: '100%' }}>
                 {/* {setImage(prev => item.id)} */}
                 <SmartImage
                   source={item.image}
-                  style={{height: 150, width: 350}}
+                  style={{ height: 150, width: '100%' }}
                   priorityValue={FastImage.priority.high}
                   cacheControl={FastImage.cacheControl.immutable}
                 />
@@ -131,13 +134,13 @@ export default function Home() {
             New Release
           </Text>
         </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
+        <View horizontal style={{ width: '100%', height: 160, marginTop: 5 }}>
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={themes.articles}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
                 <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
@@ -161,13 +164,13 @@ export default function Home() {
             Gahudi
           </Text>
         </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
+        <View horizontal style={{ width: '100%', height: 160, marginTop: 5 }}>
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={themes.articles}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
                 <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
@@ -191,13 +194,13 @@ export default function Home() {
             Kumani
           </Text>
         </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
+        <View horizontal style={{ width: '100%', height: 160, marginTop: 5 }}>
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             data={themes.articles}
             keyExtractor={item => item.id}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity activeOpacity={0.5}>
                 <HCI uri={item.image} textTitle={item.title} isHome={true} />
               </TouchableOpacity>
@@ -208,7 +211,7 @@ export default function Home() {
 
         {/*Only Gahudi Songs and their Flatlist*/}
         <FlatList
-          style={{marginTop: 15}}
+          style={{ marginTop: 15 }}
           ListHeaderComponent={
             <TouchableOpacity>
               <Text
@@ -231,14 +234,14 @@ export default function Home() {
           showsHorizontalScrollIndicator={false}
           data={themes.articles}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
-              style={{width: '95%', alignSelf: 'center', marginBottom: 3}}>
+              style={{ width: '95%', alignSelf: 'center', marginBottom: 3 }}>
               <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
                 colors={['#ccccbb', '#91916e']}
-                style={{borderRadius: 10}}>
+                style={{ borderRadius: 10 }}>
                 <ListItem
                   containerStyle={{
                     borderWidth: 1,
@@ -253,7 +256,7 @@ export default function Home() {
                     fontWeight: 'bold',
                     fontSize: 20,
                   }}
-                  subtitleStyle={{color: 'white'}}
+                  subtitleStyle={{ color: 'white' }}
                   subtitle={'Artist : ' + item.artist}
                   leftElement={
                     <SmartImage
@@ -267,7 +270,7 @@ export default function Home() {
                       source={item.image}
                       priorityValue={FastImage.priority.normal}
                       cacheControl={FastImage.cacheControl.immutable}
-                      // defaultsource={require('../../assets/images/musicicon.png')}
+                    // defaultsource={require('../../assets/images/musicicon.png')}
                     />
                   }
                   bottomDivider
@@ -309,18 +312,18 @@ export default function Home() {
             </TouchableOpacity>
           }
           ListFooterComponent={<View />}
-          style={{marginTop: 15, marginBottom: 50, borderRadius: 25}}
+          style={{ marginTop: 15, marginBottom: 50, borderRadius: 25 }}
           showsHorizontalScrollIndicator={false}
           data={themes.articles}
           keyExtractor={item => item.id}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <TouchableOpacity
-              style={{width: '95%', alignSelf: 'center', marginBottom: 3}}>
+              style={{ width: '95%', alignSelf: 'center', marginBottom: 3 }}>
               <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
                 colors={['#192f6a', '#3b963b']}
-                style={{borderRadius: 10}}>
+                style={{ borderRadius: 10 }}>
                 <ListItem
                   containerStyle={{
                     borderWidth: 1,
@@ -335,7 +338,7 @@ export default function Home() {
                     fontWeight: 'bold',
                     fontSize: 20,
                   }}
-                  subtitleStyle={{color: 'white'}}
+                  subtitleStyle={{ color: 'white' }}
                   subtitle={'Artist : ' + item.artist}
                   leftElement={
                     <SmartImage
@@ -349,7 +352,7 @@ export default function Home() {
                       source={item.image}
                       priorityValue={FastImage.priority.normal}
                       cacheControl={FastImage.cacheControl.immutable}
-                      // defaultsource={require('../../assets/images/musicicon.png')}
+                    // defaultsource={require('../../assets/images/musicicon.png')}
                     />
                   }
                   bottomDivider
