@@ -9,6 +9,7 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Dimensions
 } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Text, Block } from 'galio-framework';
@@ -26,6 +27,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import SmartImage from '../../customRootComponents/smartImage';
 import FastImage from 'react-native-fast-image';
 import { color } from 'react-native-reanimated';
+// import {Carousel} from '@ant-design/react-native';
 
 export default function Home() {
   const [isplaying] = useState(0);
@@ -66,10 +68,17 @@ export default function Home() {
       {/* Appname and playbutton controls end */}
 
       {/* Banner Carousal start */}
+      {/* using ant design */}
+      {/* <Carousel style={styles.carouselContainer} 
+        autoplay={true}
+
+      
+      /> */}
+
       <View
         style={styles.carouselContainer}>
         <Carousel
-          style={{}}
+          style={{ borderRadius:10 }}
           autoplayInterval={2500}
           loopClonesPerSide={2}
           loop={false}
@@ -78,18 +87,18 @@ export default function Home() {
           autoplay={false}
           data={themes.articles}
           renderItem={({ item }) => (
-            <Block card flex style={{ alignSelf: 'center', width: '100%' }}>
+            <Block card flex style={{ alignSelf: 'center', width: '100%',height:"100%" }}>
               {/* {setImage(prev => item.id)} */}
-              <SmartImage
+               <SmartImage
                 source={item.image}
-                style={{ height: '100%', width: 350 }}
+                style={{ height: '100%', width: '100%' ,    borderRadius:10              }}
                 priorityValue={FastImage.priority.high}
                 cacheControl={FastImage.cacheControl.immutable}
-              />
+              /> 
             </Block>
           )}
-          itemWidth={350}
-          sliderWidth={350}
+          itemWidth={Dimensions.get('screen').width-20}
+          sliderWidth={Dimensions.get('screen').width-20}
         />
       </View>
       {/* Banner Carousal end */}
@@ -293,10 +302,12 @@ const styles = StyleSheet.create({
   carouselContainer: {
 
     height: 152,
-    width: '90%',
+    width: '75%',
     alignSelf: 'center',
+    alignItems:'center',
     marginTop: 15,
-    marginBottom:20
+    marginBottom:20,
+    borderRadius:10
   },
   newRelease: {
 

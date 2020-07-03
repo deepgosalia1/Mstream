@@ -27,12 +27,12 @@ const items = [
 ];
 export default function Search() {
   return (
-    <View>
+    <LinearGradient colors={['#66b2ff','#7abdff','#ffffff']}
+    locations={[0.1,0.2,1]}
+        style={styles.linearGradient}>
       <SafeAreaView>
         <ScrollView>
-          <LinearGradient colors={['#f0fff0','#cbf2dc','#2ecc71','#20b27d','#1dad7f'].reverse()}
-            locations={[0.1,0.2,0.3,0.5,1]}
-            style={styles.linearGradient}>
+       
             <Text style={styles.searchHeader} > Search </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
               <TextInput style={styles.searchBar} />
@@ -61,10 +61,10 @@ export default function Search() {
               />
             </View>
 
-          </LinearGradient>
         </ScrollView>
       </SafeAreaView>
-    </View>
+    </LinearGradient>
+
   );
 }
 
@@ -107,6 +107,7 @@ const styles = StyleSheet.create(
       fontSize: 22
     },
     linearGradient: {
+      height:'100%'
     },
     gridView: {
       marginTop: 5,

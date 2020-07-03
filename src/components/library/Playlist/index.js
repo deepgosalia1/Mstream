@@ -179,10 +179,7 @@ styles = StyleSheet.create({
     color: 'white',
   },
   linearGradient: {
-    flex: 1,
-    paddingLeft: 0,
-    paddingRight: 0,
-    borderRadius: 0,
+    height:'100%'
   },
 });
 
