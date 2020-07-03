@@ -18,17 +18,20 @@ import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 
 
 const items = [
-  { name: 'pink', code: '#ff4dd2' }, { name: 'EMERALD', code: '#2ecc71' },
-  { name: 'PETER RIVER', code: '#3498db' }, { name: 'AMETHYST', code: '#9b59b6' },
-  { name: 'WET ASPHALT', code: '#34495e' }, { name: 'GREEN SEA', code: '#16a085' },
+  { name: 'pink', code: '#FF1493' }, { name: 'EMERALD', code: '#7FFF00' },
+  { name: 'PETER RIVER', code: '#3498db' }, { name: 'AMETHYST', code: '#8A2BE2' },
+  { name: 'WET ASPHALT', code: '#7DF9FF' }, { name: 'GREEN SEA', code: '#FF3A40' },
+  { name: 'GREEN SEA', code: '#FB4A21' }, { name: 'GREEN SEA', code: '#FCF133' },
+  { name: 'GREEN SEA', code: '#FF00FF' }, { name: 'GREEN SEA', code: '#FF6731' },
+  { name: 'GREEN SEA', code: '#3A90E5' },  { name: 'GREEN SEA', code: '#69FF46' }
 ];
 export default function Search() {
   return (
     <View>
       <SafeAreaView>
         <ScrollView>
-          <LinearGradient colors={['#0039e6','#0033cc','#002db3','#002699','#002080','#001a66','#00134d'].reverse()}
-            locations={[0.2,0.4,0.6,0.7,0.8,0.95,1]}
+          <LinearGradient colors={['#f0fff0','#cbf2dc','#2ecc71','#20b27d','#1dad7f'].reverse()}
+            locations={[0.1,0.2,0.3,0.5,1]}
             style={styles.linearGradient}>
             <Text style={styles.searchHeader} > Search </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
@@ -47,7 +50,7 @@ export default function Search() {
                 // fixed
                 // spacing={20}
                 renderItem={({ item, index }) => (<LinearGradient colors={[item.code, '#ffffff']}
-                  location={[0.9, 1]}
+                  locations={[0.98,1]}
                   style={styles.itemContainer}>
                   <View style={styles.itemContainer}>
                     <Text style={styles.itemName}>{item.name}</Text>
@@ -94,14 +97,14 @@ const styles = StyleSheet.create(
 
     },
     topAlbums: {
-      paddingTop: 10,
+      paddingTop: 5,
       marginBottom:5,
       marginLeft:10,
       textAlign: 'left',
-      color: 'white',
-      fontFamily: 'arial',
-      fontWeight: "400",
-      fontSize: 20
+      color: 'black',
+      fontFamily: 'verdana',
+      fontWeight: "600",
+      fontSize: 22
     },
     linearGradient: {
     },

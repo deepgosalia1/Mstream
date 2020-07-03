@@ -4,16 +4,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {
+  StyleSheet,
   ScrollView,
   View,
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {FontAwesome} from '@expo/vector-icons';
-import {Text, Block} from 'galio-framework';
+import { FontAwesome } from '@expo/vector-icons';
+import { Text, Block } from 'galio-framework';
 import * as themes from '../../constants';
-import {useState} from 'react';
-import {ListItem} from 'react-native-elements';
+import { useState } from 'react';
+import { ListItem } from 'react-native-elements';
 import {
   Feather,
   Entypo,
@@ -24,6 +25,7 @@ import HCI from '../../customRootComponents/homeCardImage';
 import LinearGradient from 'react-native-linear-gradient';
 import SmartImage from '../../customRootComponents/smartImage';
 import FastImage from 'react-native-fast-image';
+import { color } from 'react-native-reanimated';
 
 export default function Home() {
   const [isplaying] = useState(0);
@@ -40,336 +42,279 @@ export default function Home() {
     playButton = <FontAwesome name="play-circle" size={48} color="white" />;
   }
   return (
-    <ScrollView style={{flex: 1}}>
-      <LinearGradient colors={['#9296f0', '#2227ab', '#9296f0']}>
-        {/* AppName and playbutton controls section {start} */}
-
-        <View style={{}}>
-          <View
-            style={{
-              width: '100%',
-              height: 45,
-              alignSelf: 'center',
-              position: 'absolute',
-            }}>
-            {/* <LinearGradient colors={['#FF0000', '#FF7F00', '#FFFF00', '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF']}> */}
-            <Text
-              h4
-              bold
-              color={'#191919'}
-              style={{
-                textAlign: 'center',
-                textShadowColor: 'white',
-                textShadowOffset: {width: 0.5, height: -1},
-                textShadowRadius: 20,
-              }}>
-              M_Stream
-            </Text>
-            {/* </LinearGradient> */}
-          </View>
-          <View style={{height: 45, alignSelf: 'flex-end', marginRight: 5}}>
-            <TouchableOpacity
-              style={{alignSelf: 'center'}}
-              // onPress={() => setPlay(!isplaying)}
-            >
-              {/* {playButton} */}
-              <Feather name="bell" size={40} color="white" />
-            </TouchableOpacity>
-          </View>
+    
+    <ScrollView style={{ flex: 1 , backgroundColor:'#'}}>
+      <LinearGradient colors={['#66b2ff','#7abdff','#ffffff']}
+        locations={[0.1,0.2,1]}>
+                  
+      {/* AppName and playbutton controls section {start} */}
+      <View style={{}}>
+        <View style={styles.headerView}>
+          <Text style={styles.headerText}>Musynk</Text>
         </View>
+        <View style={styles.bellIcon}>
+          <TouchableOpacity
+            style={{ alignSelf: 'center' }}
+          // onPress={() => setPlay(!isplaying)}
+          >
+            {/* {playButton} */}
+            <Feather name="bell" size={40} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
 
-        {/* Appname and playbutton controls end */}
+      {/* Appname and playbutton controls end */}
 
-        {/* Banner Carousal start */}
+      {/* Banner Carousal start */}
+      <View
+        style={styles.carouselContainer}>
+        <Carousel
+          style={{}}
+          autoplayInterval={2500}
+          loopClonesPerSide={2}
+          loop={false}
+          enableSnap={true}
+          lockScrollWhileSnapping={true}
+          autoplay={false}
+          data={themes.articles}
+          renderItem={({ item }) => (
+            <Block card flex style={{ alignSelf: 'center', width: '100%' }}>
+              {/* {setImage(prev => item.id)} */}
+              <SmartImage
+                source={item.image}
+                style={{ height: '100%', width: 350 }}
+                priorityValue={FastImage.priority.high}
+                cacheControl={FastImage.cacheControl.immutable}
+              />
+            </Block>
+          )}
+          itemWidth={350}
+          sliderWidth={350}
+        />
+      </View>
+      {/* Banner Carousal end */}
 
-        <View
-          style={{
-            height: 152,
-            width: '85%',
-            alignSelf: 'center',
-            marginTop: 10,
-          }}>
-          <Carousel
-            style={{}}
-            autoplayInterval={2500}
-            loopClonesPerSide={2}
-            loop={false}
-            enableSnap={true}
-            lockScrollWhileSnapping={true}
-            autoplay={false}
-            data={themes.articles}
-            renderItem={({item}) => (
-              <Block card flex style={{alignSelf: 'flex-end', width: '100%'}}>
-                {/* {setImage(prev => item.id)} */}
+      {/*Albums and their cards section (NEW RELEASES)*/}
+      <Text style={styles.textTitle}>New Release</Text>
+      <View horizontal style={{ width: '100%', height: 160, marginTop: 5 }}>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={themes.articles}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.5}>
+              <HCI uri={item.image} textTitle={item.title} isHome={true} />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      {/*Albums and their cards section (NEW RELEASES)*/}
+
+      {/*Albums and their cards section (GAHUDI RELEASES)*/}
+      <Text style={styles.textTitle}>Gahudi</Text>
+      <View horizontal style={{ width: '100%', height: 160, marginTop: 5 }}>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={themes.articles}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.5}>
+              <HCI uri={item.image} textTitle={item.title} isHome={true} />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      {/*Albums and their cards section (Gahudi RELEASES)*/}
+
+      {/*Albums and their cards section (Kumani RELEASES)*/}
+
+      <Text style={styles.textTitle}>Kumani</Text>
+      <View horizontal style={styles.horView}>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={themes.articles}
+          keyExtractor={item => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity activeOpacity={0.5}>
+              <HCI uri={item.image} textTitle={item.title} isHome={true} />
+            </TouchableOpacity>
+          )}
+        />
+      </View>
+      {/*Albums and their cards section (Kumani RELEASES)*/}
+
+      {/*Only Gahudi Songs and their Flatlist*/}
+      <FlatList
+        style={{ marginTop: 0 }}
+        ListHeaderComponent={<Text style={styles.textTitle}>New from Gahudi Artists</Text>}
+        ListFooterComponent={<View />}
+        showsHorizontalScrollIndicator={false}
+        data={themes.articles}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={{ width: '100%', alignSelf: 'center' }}>
+
+            <ListItem
+              containerStyle={{
+                marginTop:10,
+                height: 80,
+                backgroundColor: 'transparent',
+
+              }}
+              title={item.title}
+              titleStyle={{
+                color: 'black',
+                fontWeight:'600',
+                fontSize: 20,
+              }}
+              subtitleStyle={{ color: 'black' }}
+              subtitle={'Artist : ' + item.artist}
+              leftElement={
                 <SmartImage
+                  // isHome = {true}
+                  style={{
+                    width: 70,
+                    height: 70,
+                    backgroundColor: 'red',
+                    alignSelf:'center',
+                    borderRadius:5
+                  }}
                   source={item.image}
-                  style={{height: 150, width: 350}}
-                  priorityValue={FastImage.priority.high}
+                  priorityValue={FastImage.priority.normal}
                   cacheControl={FastImage.cacheControl.immutable}
+                // defaultsource={require('../../assets/images/musicicon.png')}
                 />
-              </Block>
-            )}
-            itemWidth={350}
-            sliderWidth={350}
-          />
-        </View>
+              }
+             
+              rightElement={
+                <TouchableOpacity>
+                  <Entypo
+                    name="dots-three-vertical"
+                    size={24}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              }
+            />
+          </TouchableOpacity>
+        )}
+      />
+      {/*Only Gahudi Songs and their Flatlist*/}
 
-        {/* Banner Carousal end */}
+      {/*Only Kumani Songs and their Flatlist*/}
+      <FlatList
 
-        {/*Albums and their cards section (NEW RELEASES)*/}
-        <TouchableOpacity>
-          <Text
-            style={{
-              borderBottomColor: 'white',
-              marginTop: 20,
-              color: 'white',
-              marginLeft: 8,
-              marginBottom: 5,
-              fontSize: 19,
-            }}
-            bold>
-            New Release
-          </Text>
-        </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={themes.articles}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <TouchableOpacity activeOpacity={0.5}>
-                <HCI uri={item.image} textTitle={item.title} isHome={true} />
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        {/*Albums and their cards section (NEW RELEASES)*/}
-
-        {/*Albums and their cards section (GAHUDI RELEASES)*/}
-        <TouchableOpacity>
-          <Text
-            style={{
-              borderBottomColor: 'white',
-              marginTop: 5,
-              color: 'white',
-              marginLeft: 8,
-              marginBottom: 5,
-            }}
-            h5
-            bold>
-            Gahudi
-          </Text>
-        </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={themes.articles}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <TouchableOpacity activeOpacity={0.5}>
-                <HCI uri={item.image} textTitle={item.title} isHome={true} />
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        {/*Albums and their cards section (Gahudi RELEASES)*/}
-
-        {/*Albums and their cards section (Kumani RELEASES)*/}
-        <TouchableOpacity>
-          <Text
-            style={{
-              borderBottomColor: 'white',
-              marginTop: 5,
-              color: 'white',
-              marginLeft: 8,
-              marginBottom: 5,
-            }}
-            h5
-            bold>
-            Kumani
-          </Text>
-        </TouchableOpacity>
-        <View horizontal style={{width: '100%', height: 160, marginTop: 5}}>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            data={themes.articles}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => (
-              <TouchableOpacity activeOpacity={0.5}>
-                <HCI uri={item.image} textTitle={item.title} isHome={true} />
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-        {/*Albums and their cards section (Kumani RELEASES)*/}
-
-        {/*Only Gahudi Songs and their Flatlist*/}
-        <FlatList
-          style={{marginTop: 15}}
-          ListHeaderComponent={
-            <TouchableOpacity>
-              <Text
-                style={{
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'white',
-                  marginTop: 10,
-                  color: 'white',
-                  marginLeft: 15,
-                  width: 245,
-                  marginBottom: 10,
+        ListHeaderComponent={<Text style={styles.textTitle}>New from Kumani Artists</Text>}
+        ListFooterComponent={<View />}
+        style={{ marginTop:40, }}
+        showsHorizontalScrollIndicator={false}
+        data={themes.articles}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+          style={{ width: '100%', alignSelf: 'center' }}>
+           
+              <ListItem
+              containerStyle={{
+                marginTop:10,
+                height: 80,
+                backgroundColor: 'transparent',
+              }}
+                
+                title={item.title}
+                titleStyle={{
+                  color: 'black',
+                  fontWeight:'600',
+                  fontSize: 20,
                 }}
-                h5
-                bold>
-                New from Gahudi Artists
-              </Text>
-            </TouchableOpacity>
-          }
-          ListFooterComponent={<View />}
-          showsHorizontalScrollIndicator={false}
-          data={themes.articles}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              style={{width: '95%', alignSelf: 'center', marginBottom: 3}}>
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
-                colors={['#ccccbb', '#91916e']}
-                style={{borderRadius: 10}}>
-                <ListItem
-                  containerStyle={{
-                    borderWidth: 1,
-                    borderColor: 'grey',
-                    height: 70,
-                    borderRadius: 10,
-                    backgroundColor: '#',
-                  }}
-                  title={item.title}
-                  titleStyle={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: 20,
-                  }}
-                  subtitleStyle={{color: 'white'}}
-                  subtitle={'Artist : ' + item.artist}
-                  leftElement={
-                    <SmartImage
-                      // isHome = {true}
-                      style={{
-                        width: 50,
-                        height: 50,
-                        backgroundColor: 'red',
-                        alignSelf: 'center',
-                      }}
-                      source={item.image}
-                      priorityValue={FastImage.priority.normal}
-                      cacheControl={FastImage.cacheControl.immutable}
-                      // defaultsource={require('../../assets/images/musicicon.png')}
-                    />
-                  }
-                  bottomDivider
-                  topDivider
-                  rightElement={
-                    <TouchableOpacity>
-                      <Entypo
-                        name="dots-three-vertical"
-                        size={24}
-                        color="white"
-                      />
-                    </TouchableOpacity>
-                  }
-                />
-              </LinearGradient>
-            </TouchableOpacity>
-          )}
-        />
-        {/*Only Gahudi Songs and their Flatlist*/}
-
-        {/*Only Kumani Songs and their Flatlist*/}
-        <FlatList
-          ListHeaderComponent={
-            <TouchableOpacity>
-              <Text
-                style={{
-                  borderBottomWidth: 1,
-                  borderBottomColor: 'white',
-                  marginTop: 10,
-                  color: 'white',
-                  marginLeft: 15,
-                  width: 245,
-                  marginBottom: 10,
-                }}
-                h5
-                bold>
-                New from Gahudi Artists
-              </Text>
-            </TouchableOpacity>
-          }
-          ListFooterComponent={<View />}
-          style={{marginTop: 15, marginBottom: 50, borderRadius: 25}}
-          showsHorizontalScrollIndicator={false}
-          data={themes.articles}
-          keyExtractor={item => item.id}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              style={{width: '95%', alignSelf: 'center', marginBottom: 3}}>
-              <LinearGradient
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 0}}
-                colors={['#192f6a', '#3b963b']}
-                style={{borderRadius: 10}}>
-                <ListItem
-                  containerStyle={{
-                    borderWidth: 1,
-                    borderColor: 'grey',
-                    height: 70,
-                    borderRadius: 10,
-                    backgroundColor: '#',
-                  }}
-                  title={item.title}
-                  titleStyle={{
-                    color: 'white',
-                    fontWeight: 'bold',
-                    fontSize: 20,
-                  }}
-                  subtitleStyle={{color: 'white'}}
-                  subtitle={'Artist : ' + item.artist}
-                  leftElement={
-                    <SmartImage
-                      // isHome = {true}
-                      style={{
-                        width: 50,
-                        height: 50,
-                        backgroundColor: 'red',
-                        alignSelf: 'center',
-                      }}
-                      source={item.image}
-                      priorityValue={FastImage.priority.normal}
-                      cacheControl={FastImage.cacheControl.immutable}
-                      // defaultsource={require('../../assets/images/musicicon.png')}
-                    />
-                  }
-                  bottomDivider
-                  topDivider
-                  rightElement={
-                    <TouchableOpacity>
-                      <Entypo
-                        name="dots-three-vertical"
-                        size={24}
-                        color="white"
-                      />
-                    </TouchableOpacity>
-                  }
-                />
-              </LinearGradient>
-            </TouchableOpacity>
-          )}
-        />
-        {/*Only Kumani Songs and their Flatlist*/}
+                subtitleStyle={{ color: 'black' }}
+                subtitle={'Artist : ' + item.artist}
+                leftElement={
+                  <SmartImage
+                    // isHome = {true}
+                    style={{
+                      width: 70,
+                      height: 70,
+                      backgroundColor: 'red',
+                      alignSelf:'center',
+                      borderRadius:5
+                    }}
+                    source={item.image}
+                    priorityValue={FastImage.priority.normal}
+                    cacheControl={FastImage.cacheControl.immutable}
+                  // defaultsource={require('../../assets/images/musicicon.png')}
+                  />
+                }
+                rightElement={
+                  <TouchableOpacity>
+                    <Entypo
+                    name="dots-three-vertical"
+                    size={24}
+                    color="black"
+                  />
+                  </TouchableOpacity>
+                }
+              />
+          </TouchableOpacity>
+        )}
+      />
+      {/*Only Kumani Songs and their Flatlist*/}
       </LinearGradient>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  headerView: {
+    width: '100%',
+    alignSelf: 'center',
+    position: 'absolute',
+    marginBottom:10
+  },
+  headerText: {
+    color: '#25df25',
+    fontSize: 40,
+    fontWeight: '700',
+    textAlign: 'center',
+    textShadowOffset: { width: 0.5, height: -1 },
+    textShadowRadius: 20,
+  },
+  bellIcon: {
+    alignSelf: 'flex-end',
+    paddingRight: 10,
+    paddingTop: 2.5,
+    paddingBottom: 2.5,
+    color: '#33cc00'
+  },
+  carouselContainer: {
+
+    height: 152,
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 15,
+    marginBottom:20
+  },
+  newRelease: {
+
+  },
+
+  textTitle: {
+    color: 'black',
+    fontFamily: 'verdana',
+    fontSize: 22,
+    fontWeight: '600',
+    textAlign: 'justify',
+    paddingLeft: 10,
+    marginTop: 5,
+    marginBottom:5
+  },
+  horView: {
+    width: '100%',
+    height: 160,
+    marginTop: 5
+  }
+})

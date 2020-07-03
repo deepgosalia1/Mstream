@@ -92,7 +92,7 @@ export default function Playlist({ navigation }) {
       style={styles.linearGradient}>
       <View >
         <Text style={styles.playlistHeader} > Playlists </Text>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
+        <View style={{ flexDirection: 'row', alignSelf: "center" }}>
           <TextInput
             style={styles.inputBar}
             placeholder="Add New Playlist"

@@ -93,9 +93,8 @@ export default function PlaylistSection({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#140341' }}>
       <LinearGradient colors={['#666666','#4d4d4d','#333333','#1a1a1a','#000000']}
-        location={[0.2, 0.8, 1]}
+        locations={[0.2,0.45,0.7, 0.9, 1]}
         style={styles.linearGradient}>
       <Surface raised style={{ marginTop: 30, height: 180, width: 200, alignSelf: 'center', elevation: 50, borderRadius: 30 }}>
         <Image source={{ uri: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' } || require('../../assets/images/playlist.png')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
@@ -124,7 +123,6 @@ export default function PlaylistSection({ route, navigation }) {
         />
       </View>
       </LinearGradient>
-    </View>
   );
 }
 
@@ -178,5 +176,8 @@ styles = StyleSheet.create({
     fontSize: 25,
     color: 'white',
   },
+  linearGradient:{
+     flex: 1
+  }
 });
 
