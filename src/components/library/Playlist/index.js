@@ -7,10 +7,16 @@ import {
   TouchableOpacity,
   Alert,
   FlatList,
-  Button
+  Button,
+  Image
 } from 'react-native';
 import { TextInput } from 'react-native-paper';
 import LinearGradient from 'react-native-linear-gradient';
+import { ListItem } from 'react-native-elements';
+import SmartImage from '../../../customRootComponents/smartImage';
+import FastImage from 'react-native-fast-image';
+import { FontAwesome5, Feather, Entypo, AntDesign, MaterialIcons, SimpleLineIcons, Ionicons } from '@expo/vector-icons';
+
 // Firebase Imports
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
@@ -81,70 +87,101 @@ export default function Playlist({ navigation }) {
   }
 
   return (
-    <View  style={styles.viewContainer}>
-    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a']} 
-                    location={[0.2,0.8,1]}
-                    style={styles.linearGradient}>
-      <View>
-        {/* <Text style={{ fontSize: 30, color: 'white', width: 300, padding: 10 }} >
-          Your PLaylists Here !</Text> */}
+    <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a'].reverse()}
+      location={[0.2, 0.8, 1]}
+      style={styles.linearGradient}>
+      <View >
+        <Text style={styles.playlistHeader} > Playlists </Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
+          <TextInput
+            style={styles.inputBar}
+            placeholder="Add New Playlist"
+            onChangeText={inputHandler}
+            value={input} />
+        </View>
+        <View style={styles.addButton}>
+          <Button
+            title="Create"
+            onPress={inputSetter} />
+        </View>
 
-        <TextInput
-          placeholder="Playlist Title"
-          onChangeText={inputHandler}
-          value={input} />
-
-        <Button
-          title="Create"
-          onPress={inputSetter} />
-
+        <View>
+          <FlatList style={styles.listDisplay}
+            data={list}
+            renderItem={({ item }) => (
+             <TouchableOpacity onLongPress={onDelete.bind(this, item)}
+              onPress={() => navigation.navigate('PlaylistSection', { item })}>
+              <View style={styles.listItems}>
+               <Image source={ require('../../../assets/images/playlist.png')} style={styles.imageDisplay} />
+                <Text style={styles.textdisplay}>{item.name}</Text>
+                </View>
+               </TouchableOpacity>
+            )} />
+        </View>
       </View>
+    </LinearGradient>
 
-      <View>
-        <FlatList style={styles.listdisplay}
-          data={list}
-          renderItem={({ item }) => (<TouchableOpacity onLongPress={onDelete.bind(this, item)}
-            onPress={() => navigation.navigate('PlaylistSection', { item })}>
-            <View>
-              <Text style={styles.listdisplay}>{item.name}</Text>
-            </View>
-          </TouchableOpacity>
-          )} />
-      </View>
-      </LinearGradient>
-    </View>
 
   );
 }
 
 styles = StyleSheet.create({
-
-  viewContainer: {
-    flex: 1,
-    backgroundColor: '#140341',
+  playlistHeader: {
+    paddingTop: 20,
+    paddingBottom: 10,
+    textAlign: 'justify',
+    color: 'white',
+    fontFamily: 'arial',
+    fontWeight: "500",
+    fontSize: 40
   },
-  listdisplay: {
+  inputBar: {
+    marginTop: 10,
+    marginBottom: 10,
+    height: 50,
+    width: '94%',
+    borderTopEndRadius: 10,
+    borderTopStartRadius: 10,
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10,
+  },
+  addButton: {
+    color: "white",
+    marginTop: 10,
+    marginBottom: 10,
 
-    textAlign:'center',
+  },
+  listDisplay: {
+    marginTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20
+  },
+  listItems: {
+    flexDirection:'row',
+    marginTop:10,
+    marginBottom:10,
+    alignItems:'center',
+    justifyContent:'flex-start',
+    paddingTop: 2.5,
+    paddingBottom: 2.5,
+    
+  },
+  imageDisplay: {
+    height: 75,
+    width: 75,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginBottom:10
+  },
+  textdisplay: {
+    paddingLeft: 20,
     fontSize: 25,
     color: 'white',
   },
-  textdisplay: {
-    textAlign: "center",
-  },
-  playlist: {
-    fontSize: 80,
-    borderBottomWidth: 5,
-    borderBottomColor: 'white',
-    marginTop: 5,
-    color: 'white',
-    marginLeft: 15,
-    width: 300
-  },
   linearGradient: {
     flex: 1,
-    paddingLeft: 15,
-    paddingRight: 15,
+    paddingLeft: 0,
+    paddingRight: 0,
     borderRadius: 0,
   },
 });

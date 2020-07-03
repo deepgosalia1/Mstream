@@ -29,8 +29,9 @@ export default function PlaylistSection({ route, navigation }) {
   const [input, setinput] = useState('');
   const [list, displayList] = useState([]);
   // const [datainputList, setData] = useState([])
-  var arr = Object.keys(item.songs)
-  console.log("arr is ", arr)
+  var arr = Object.values(item.songs)
+  var tempe = Object.keys(item.songs)
+
   const inputHandler = (enteredText) => { setinput(enteredText); }
 
   const inputSetter = () => {
@@ -55,11 +56,11 @@ export default function PlaylistSection({ route, navigation }) {
     )
   }
 
-  const onDelete = (node) => {
-    console.log("ye delete hoga", node.name)
+  const onDelete = (item) => {
+    console.log("ye delete hoga", item.name)
+    var popup = "Remove from "+item.name+" ?"
     Alert.alert(
-      'Delete ?',
-      node.name,
+      popup,
       [
         {
           text: 'Delete',
@@ -76,11 +77,20 @@ export default function PlaylistSection({ route, navigation }) {
           style: 'cancel'
         },
       ],
-      { cancelable: false }
+      { cancelable: true }
     );
   }
 
-  const goTo = () => { console.log("Does nothing"); }
+  const getSong = (sitem,sindex) => { 
+    console.log("gets song link"); 
+    console.log(tempe[sindex])
+    database().ref('/songs/' +tempe[sindex] )
+        .once('value', function (snapshot) {
+          console.log(snapshot)
+          var data1 = snapshot
+        });
+    navigation.navigate('Music', {snapshot}); 
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: '#140341' }}>
@@ -88,7 +98,7 @@ export default function PlaylistSection({ route, navigation }) {
         location={[0.2, 0.8, 1]}
         style={styles.linearGradient}>
       <Surface raised style={{ marginTop: 30, height: 180, width: 200, alignSelf: 'center', elevation: 50, borderRadius: 30 }}>
-        <Image source={{ uri: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' } || require('../../assets/images/temp.jpeg')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
+        <Image source={{ uri: 'https://a10.gaanacdn.com/images/albums/61/161/crop_480x480_161.jpg' } || require('../../assets/images/playlist.png')} style={{ height: 200, width: 200, borderRadius: 30, alignSelf: 'center' }} />
       </Surface>
 
       <View style={{ marginTop: 25, flexDirection: 'column', alignItems: 'center' }}>
@@ -100,12 +110,15 @@ export default function PlaylistSection({ route, navigation }) {
         <FlatList
           style={styles.listdisplay}
           data={arr}
-          renderItem={({ item }) => (
+          renderItem={({ item,index }) => (
             <TouchableOpacity
               onLongPress={onDelete.bind(this, item)}
-              onPress={() => { navigation.navigate('Music', { url: url }) }}
+              onPress={getSong.bind(this,item,index)}
             >
-              <Text style={styles.textdisplay}>{item}</Text>
+              <View style={styles.listItems}>
+               <Image source={ require('../../assets/images/playlist.png')} style={styles.imageDisplay} />
+               <Text style={styles.textdisplay}>{item}</Text>
+                </View>
             </TouchableOpacity>
           )}
         />
@@ -138,19 +151,32 @@ styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  textdisplay: {
-    color:'white',
-    textAlign: "center",
-    fontSize: 25,
+  listDisplay: {
+    marginTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20
   },
-  playlist: {
-    fontSize: 80,
-    borderBottomWidth: 5,
-    borderBottomColor: 'white',
-    marginTop: 5,
+  listItems: {
+    flexDirection:'row',
+    marginTop:10,
+    marginBottom:10,
+    alignItems:'center',
+    justifyContent:'flex-start',
+    paddingTop: 2.5,
+    paddingBottom: 2.5,
+    
+  },
+  imageDisplay: {
+    height: 75,
+    width: 75,
+    borderRadius: 5,
+    alignSelf: 'center',
+    marginBottom:10
+  },
+  textdisplay: {
+    paddingLeft: 20,
+    fontSize: 25,
     color: 'white',
-    marginLeft: 15,
-    width: 300
-  }
+  },
 });
 
