@@ -18,6 +18,7 @@ import auth from '@react-native-firebase/auth';
 import { Text, Input, Button } from 'galio-framework';
 import { Surface } from 'react-native-paper';
 import { Divider } from 'react-native-elements';
+import database from '@react-native-firebase/database';
 
 export default function LoginApp({ navigation }) {
 
@@ -79,7 +80,23 @@ export default function LoginApp({ navigation }) {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
    
     // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    return auth().signInWithCredential(googleCredential).then(()=>{
+
+      const user = auth().currentUser;
+      console.log('Welcome, '+user.displayName)
+        // if (user.phoneNumber<=0){
+        database()
+        .ref('/users/'+user.uid)
+        .set({
+          name: user.displayName,
+          dob: '',
+          phone: 0,
+          email: user.email,
+          bs64:'',
+          bs64_hash:'',
+        })
+      // }
+    });
 
 
   }
