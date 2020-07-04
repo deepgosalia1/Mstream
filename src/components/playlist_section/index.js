@@ -131,12 +131,15 @@ export default function PlaylistSection({ route, navigation }) {
   );
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
 
   listdisplay: {
     textAlign:'center', 
     fontSize: 25,
-    color:'white',   
+    color:'white', 
+    marginTop: 10,
+    paddingLeft: 20,
+    paddingRight: 20  
   },
   playlistHeader: {
     color: '#FFFFFF',
@@ -153,11 +156,6 @@ styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-  },
-  listDisplay: {
-    marginTop: 10,
-    paddingLeft: 20,
-    paddingRight: 20
   },
   listItems: {
     flexDirection:'row',
