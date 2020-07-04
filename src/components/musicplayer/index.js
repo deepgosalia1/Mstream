@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -16,8 +16,8 @@ import {
 import Slider from 'react-native-slider';
 import Moment from 'moment';
 import DeviceInfo from 'react-native-device-info';
-import {FontAwesome5, Feather, Entypo} from '@expo/vector-icons';
-import {Surface, Card, Badge} from 'react-native-paper';
+import { FontAwesome5, Feather, Entypo } from '@expo/vector-icons';
+import { Surface, Card, Badge } from 'react-native-paper';
 import TrackPlayer, {
   useProgress,
   usePlaybackState,
@@ -28,28 +28,28 @@ import storage from '@react-native-firebase/storage';
 import SmartImage from '../../customRootComponents/smartImage';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function MusicPlayer({navigation, route}) {
+export default function MusicPlayer({ navigation, route }) {
   const [optionsVisible, setoptionsVisible] = useState(false);
   const [totaltime] = useState(0);
   const progress = useProgress();
   const playbackState = usePlaybackState();
   var value = -1;
-  const {data1, uid,data2} = route.params
+  const { data1, uid, data2 } = route.params
   useEffect(() => {
     setup();
-    console.log(data1,"dataa 1 ",uid)
+    console.log('aaya hua data 2', data2)
   }, []);
 
   const setup = async () => {
-    await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getMetadata().then(res=>console.log(res.fullPath + 'yooo'))
+    await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getMetadata().then(res => console.log(res.fullPath + 'yooo'))
     await TrackPlayer.setupPlayer()
       .then(async () => {
         await TrackPlayer.add({
           // url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
           // url: (await storage()
           //   .ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3')
-          //   .getDownloadURL().then(res=> console.log(res, 'uuuuu'))).toString(),
-          url:data2,
+          //   .getDownloadURL()).toString(),
+          url: data2,
           artwork:
             'https://cdn6.f-cdn.com/contestentries/1341746/29180739/5b14c65f43c08_thumb900.jpg',
         });
@@ -122,7 +122,7 @@ export default function MusicPlayer({navigation, route}) {
               justifyContent: 'space-between',
               flexDirection: 'column',
             }}>
-            <Text style={{fontSize: 22, textAlign: 'center'}}>
+            <Text style={{ fontSize: 22, textAlign: 'center' }}>
               In-order to receive support, please contact us at{' '}
             </Text>
             <Button
@@ -135,19 +135,19 @@ export default function MusicPlayer({navigation, route}) {
           </View>
         </View>
       </Modal>
-      <View style={{margin: 0.1, flex: 1, height: '100%'}}>
+      <View style={{ margin: 0.1, flex: 1, height: '100%' }}>
         <LinearGradient
-          style={{flex: 1, width: '100%', height: '100%'}}
+          style={{ flex: 1, width: '100%', height: '100%' }}
           colors={['#3EADCF', '#1ca9C1', '#B1E9CD']}>
           <TouchableOpacity
-            style={{alignSelf: 'flex-end', marginRight: 10, marginTop: 15}}
+            style={{ alignSelf: 'flex-end', marginRight: 10, marginTop: 15 }}
             onPress={() => {
               setoptionsVisible(prev => !prev);
             }}>
             <Entypo name="dots-three-vertical" size={24} color="white" />
           </TouchableOpacity>
           {/* playlist name and album name */}
-          <View style={{alignItems: 'center', marginTop: -25}}>
+          <View style={{ alignItems: 'center', marginTop: -25 }}>
             <Text
               style={{
                 width: '100%',
@@ -217,7 +217,7 @@ export default function MusicPlayer({navigation, route}) {
                 textAlign: 'center',
                 width: '80%',
               }}>
-             { data1.artist}
+              {data1.artist}
             </Text>
           </View>
 
@@ -236,15 +236,15 @@ export default function MusicPlayer({navigation, route}) {
                 totaltime !== 0
                   ? totaltime
                   : progress.duration > 2
-                  ? progress.duration
-                  : 300
+                    ? progress.duration
+                    : 300
               }
               trackStyle={{
                 width: Dimensions.get('screen').width - 50,
                 height: 4,
               }}
-              thumbStyle={{height: 20, width: 20, backgroundColor: '#fff'}}
-              thumbTouchSize={{width: 100, height: 40}}
+              thumbStyle={{ height: 20, width: 20, backgroundColor: '#fff' }}
+              thumbTouchSize={{ width: 100, height: 40 }}
               minimumTrackTintColor="#000000"
               onSlidingComplete={seconds => {
                 console.log(seconds);
@@ -258,8 +258,8 @@ export default function MusicPlayer({navigation, route}) {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
               }}>
-              <Text style={{flex: 1}}>{setCurr(progress.position)}</Text>
-              <Text style={{alignSelf: 'flex-end'}}>
+              <Text style={{ flex: 1 }}>{setCurr(progress.position)}</Text>
+              <Text style={{ alignSelf: 'flex-end' }}>
                 {setCurr(progress.duration)}
               </Text>
             </View>
@@ -288,7 +288,7 @@ export default function MusicPlayer({navigation, route}) {
                 name="repeat"
                 size={30}
                 color="#000000"
-                style={{alignItems: 'center'}}
+                style={{ alignItems: 'center' }}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -311,7 +311,7 @@ export default function MusicPlayer({navigation, route}) {
                 name="backward"
                 size={32}
                 color="#242320"
-                style={{alignSelf: 'center'}}
+                style={{ alignSelf: 'center' }}
               />
             </TouchableOpacity>
             {value === 2 && (
@@ -342,7 +342,7 @@ export default function MusicPlayer({navigation, route}) {
                   name="play"
                   size={38}
                   color="#000000"
-                  style={{marginTop: 5}}
+                  style={{ marginTop: 5 }}
                 />
               </TouchableOpacity>
             )}
@@ -360,7 +360,7 @@ export default function MusicPlayer({navigation, route}) {
                   name="pause"
                   size={38}
                   color="#000000"
-                  style={{marginTop: 5}}
+                  style={{ marginTop: 5 }}
                 />
               </TouchableOpacity>
             )}
@@ -377,7 +377,7 @@ export default function MusicPlayer({navigation, route}) {
                 name="forward"
                 size={32}
                 color="#242320"
-                style={{alignSelf: 'center'}}
+                style={{ alignSelf: 'center' }}
               />
             </TouchableOpacity>
             <TouchableOpacity
@@ -393,7 +393,7 @@ export default function MusicPlayer({navigation, route}) {
                 name="shuffle"
                 size={30}
                 color="#000000"
-                style={{alignItems: 'center'}}
+                style={{ alignItems: 'center' }}
               />
             </TouchableOpacity>
           </View>
@@ -411,16 +411,16 @@ export default function MusicPlayer({navigation, route}) {
               marginTop: 5,
             }}>
             <LinearGradient
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={{flex: 1, borderRadius: 10}}
-            //   colors={['#666','#fff222', '#444']}
-              colors={['#5d8187','#52c187', '#54676d'].reverse()}
-              >
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={{ flex: 1, borderRadius: 10 }}
+              //   colors={['#666','#fff222', '#444']}
+              colors={['#5d8187', '#52c187', '#54676d'].reverse()}
+            >
               <Card.Title
-                style={{flex: 1, borderRadius: 10}}
+                style={{ flex: 1, borderRadius: 10 }}
                 title={'Song Name here'}
-                titleStyle={{margin: 25, padding: 0}}
+                titleStyle={{ margin: 25, padding: 0 }}
                 left={() => (
                   <Image
                     style={{
@@ -433,7 +433,7 @@ export default function MusicPlayer({navigation, route}) {
                     source={require('../../assets/images/temp.jpeg')}
                   />
                 )}
-                leftStyle={{alignItems: 'flex-start', margin: -10, padding: 0}}
+                leftStyle={{ alignItems: 'flex-start', margin: -10, padding: 0 }}
                 right={() => (
                   <Badge
                     children={'Next'}
