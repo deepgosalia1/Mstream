@@ -34,7 +34,7 @@ export default function Search() {
         <ScrollView>
        
             <Text style={styles.searchHeader} > Search </Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: "center" }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center" }}>
               <TextInput style={styles.searchBar} />
             </View>
             <View style={styles.searchButton}>

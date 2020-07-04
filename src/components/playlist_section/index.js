@@ -18,6 +18,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import database from '@react-native-firebase/database';
 import auth from '@react-native-firebase/auth';
 import { element } from 'prop-types';
+import { sin } from 'react-native-reanimated';
 
 //url: (await storage().ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3').getDownloadURL()).toString(),
 
@@ -31,7 +32,8 @@ export default function PlaylistSection({ route, navigation }) {
   // const [datainputList, setData] = useState([])
   var arr = Object.values(item.songs)
   var tempe = Object.keys(item.songs)
-
+  var init0 = 'https://firebasestorage.googleapis.com/v0/b/mstream-9122e.appspot.com/o/Songs%2F'
+  var init1 = '.mp3?alt=media&token='
   const inputHandler = (enteredText) => { setinput(enteredText); }
 
   const inputSetter = () => {
@@ -39,7 +41,7 @@ export default function PlaylistSection({ route, navigation }) {
       .ref('/playlist/' + user.uid + '/' + input)
       .update({
         name: input,
-        songlist: ''
+        songs: '1'
       });
     setTimeout(() => {
       database().ref('/playlist/' + user.uid)
@@ -81,15 +83,18 @@ export default function PlaylistSection({ route, navigation }) {
     );
   }
 
-  const getSong = (sitem,sindex) => { 
+  const getSong = async (sitem,sindex) => { 
     console.log("gets song link"); 
     console.log(tempe[sindex])
-    database().ref('/songs/' +tempe[sindex] )
+    var data1;
+    await database().ref('/songs/' +tempe[sindex] )
         .once('value', function (snapshot) {
-          console.log(snapshot)
-          var data1 = snapshot
+          console.log(snapshot.val(), 'abababab')
+          data1 = snapshot.val()
         });
-    navigation.navigate('Music', {snapshot}); 
+      var data2=init0+data1.songname+init1+tempe[sindex]
+      console.log(data2,"dat2 hai ye")
+    navigation.navigate('Music', {data1: data1, uid: tempe[sindex],data2: data2}); 
   }
 
   return (

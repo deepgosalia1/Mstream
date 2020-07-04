@@ -34,7 +34,8 @@ export default function Playlist({ navigation }) {
       .ref('/playlist/' + user.uid + '/' + input)
       .update({
         name: input,
-        songlist: ''
+        songs: '1',
+
       });
     displayList([])
     var dataArray = []

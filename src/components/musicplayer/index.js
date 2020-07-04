@@ -28,14 +28,16 @@ import storage from '@react-native-firebase/storage';
 import SmartImage from '../../customRootComponents/smartImage';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default function MusicPlayer() {
+export default function MusicPlayer({navigation, route}) {
   const [optionsVisible, setoptionsVisible] = useState(false);
   const [totaltime] = useState(0);
   const progress = useProgress();
   const playbackState = usePlaybackState();
   var value = -1;
+  const {data1, uid,data2} = route.params
   useEffect(() => {
     setup();
+    console.log(data1,"dataa 1 ",uid)
   }, []);
 
   const setup = async () => {
@@ -44,9 +46,10 @@ export default function MusicPlayer() {
       .then(async () => {
         await TrackPlayer.add({
           // url: 'https://sampleswap.org/mp3/artist/5101/Peppy--The-Firing-Squad_YMXB-160.mp3',
-          url: (await storage()
-            .ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3')
-            .getDownloadURL()).toString(),
+          // url: (await storage()
+          //   .ref('Songs/01 - Luck Aazma - www.downloadming.com.mp3')
+          //   .getDownloadURL().then(res=> console.log(res, 'uuuuu'))).toString(),
+          url:data2,
           artwork:
             'https://cdn6.f-cdn.com/contestentries/1341746/29180739/5b14c65f43c08_thumb900.jpg',
         });
@@ -204,7 +207,7 @@ export default function MusicPlayer() {
                 textAlign: 'center',
                 width: '80%',
               }}>
-              Song_Name_here
+              {data1.songname}
             </Text>
             <Text
               style={{
@@ -214,7 +217,7 @@ export default function MusicPlayer() {
                 textAlign: 'center',
                 width: '80%',
               }}>
-              artist_name_here
+             { data1.artist}
             </Text>
           </View>
 
