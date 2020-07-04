@@ -90,34 +90,32 @@ export default function Playlist({ navigation }) {
     <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a'].reverse()}
       location={[0.2, 0.8, 1]}
       style={styles.linearGradient}>
-      <View >
-        <Text style={styles.playlistHeader} > Playlists </Text>
-        <View style={{ flexDirection: 'row', alignSelf: "center" }}>
-          <TextInput
-            style={styles.inputBar}
-            placeholder="Add New Playlist"
-            onChangeText={inputHandler}
-            value={input} />
-        </View>
-        <View style={styles.addButton}>
-          <Button
-            title="Create"
-            onPress={inputSetter} />
-        </View>
+      <Text style={styles.playlistHeader} > Playlists </Text>
+      <View style={{ flexDirection: 'row', alignSelf: "center" }}>
+        <TextInput
+          style={styles.inputBar}
+          placeholder="Add New Playlist"
+          onChangeText={inputHandler}
+          value={input} />
+      </View>
+      <View style={styles.addButton}>
+        <Button
+          title="Create"
+          onPress={inputSetter} />
+      </View>
 
-        <View>
-          <FlatList style={styles.listDisplay}
-            data={list}
-            renderItem={({ item }) => (
-             <TouchableOpacity onLongPress={onDelete.bind(this, item)}
+      <View>
+        <FlatList style={styles.listDisplay}
+          data={list}
+          renderItem={({ item }) => (
+            <TouchableOpacity onLongPress={onDelete.bind(this, item)}
               onPress={() => navigation.navigate('PlaylistSection', { item })}>
               <View style={styles.listItems}>
-               <Image source={ require('../../../assets/images/playlist.png')} style={styles.imageDisplay} />
+                <Image source={require('../../../assets/images/playlist.png')} style={styles.imageDisplay} />
                 <Text style={styles.textdisplay}>{item.name}</Text>
-                </View>
-               </TouchableOpacity>
-            )} />
-        </View>
+              </View>
+            </TouchableOpacity>
+          )} />
       </View>
     </LinearGradient>
 
@@ -125,7 +123,7 @@ export default function Playlist({ navigation }) {
   );
 }
 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   playlistHeader: {
     paddingTop: 20,
     paddingBottom: 10,
@@ -139,7 +137,7 @@ styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 10,
     height: 50,
-    width: '94%',
+    width: '95%',
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
     borderBottomStartRadius: 10,
@@ -157,21 +155,21 @@ styles = StyleSheet.create({
     paddingRight: 20
   },
   listItems: {
-    flexDirection:'row',
-    marginTop:10,
-    marginBottom:10,
-    alignItems:'center',
-    justifyContent:'flex-start',
+    flexDirection: 'row',
+    marginTop: 10,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     paddingTop: 2.5,
     paddingBottom: 2.5,
-    
+
   },
   imageDisplay: {
     height: 75,
     width: 75,
     borderRadius: 5,
     alignSelf: 'center',
-    marginBottom:10
+    marginBottom: 10
   },
   textdisplay: {
     paddingLeft: 20,
@@ -179,7 +177,7 @@ styles = StyleSheet.create({
     color: 'white',
   },
   linearGradient: {
-    height:'100%'
+    height: '100%'
   },
 });
 
