@@ -34,7 +34,8 @@ export default function Playlist({ navigation }) {
       .ref('/playlist/' + user.uid + '/' + input)
       .update({
         name: input,
-        songlist: ''
+        songs: '1',
+
       });
     displayList([])
     var dataArray = []
@@ -90,7 +91,6 @@ export default function Playlist({ navigation }) {
     <LinearGradient colors={['#4c669f', '#3b5998', '#192f6a'].reverse()}
       location={[0.2, 0.8, 1]}
       style={styles.linearGradient}>
-      <View >
         <Text style={styles.playlistHeader} > Playlists </Text>
         <View style={{ flexDirection: 'row', alignSelf: "center" }}>
           <TextInput
@@ -118,7 +118,6 @@ export default function Playlist({ navigation }) {
                </TouchableOpacity>
             )} />
         </View>
-      </View>
     </LinearGradient>
 
 
