@@ -34,7 +34,7 @@
     "expo-font": "^8.2.1",
     "expo-image-picker": "^8.1.0",
     "galio-framework": "^0.6.3",
-    "moment": "^2.25.3",
+    "moment": "^2.29.2",
     "prop-types": "^15.7.2",
     "react": "16.11.0",
     "react-native": "0.62.2",
